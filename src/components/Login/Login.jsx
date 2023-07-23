@@ -9,8 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const [login, { data, isLoading, error: responseError }] =
-    useLoginMutation();
+  const [login, { data, isLoading, error: responseError }] = useLoginMutation();
 
   const navigate = useNavigate();
 
@@ -18,9 +17,9 @@ const Login = () => {
     if (responseError?.data) {
       setError(responseError.data);
     }
-      if (data?.accessToken && data?.user) {
-        alert('login success')
-    //   navigate("/login");
+    if (data?.accessToken && data?.user) {
+      alert("login success");
+      navigate("/homepage");
     }
   }, [data]);
 
@@ -37,7 +36,6 @@ const Login = () => {
 
   return (
     <form method="POST" onSubmit={handleSubmit}>
-      
       <input
         type="email"
         placeholder="enter email"
