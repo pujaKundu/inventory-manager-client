@@ -39,6 +39,7 @@ export default function Sidebar(props) {
   const [showConfiguration, setShowConfiguration] = useState(false);
   const [showPurchase, setShowPurchase] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showSubmenu, setShowSubmenu] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -46,6 +47,7 @@ export default function Sidebar(props) {
   const toggleConfiguration = () => {
     setShowConfiguration(true);
     setShowPurchase(false);
+    setShowSubmenu(true);
   };
   const togglePurchase = () => {
     setShowPurchase(true);
@@ -65,6 +67,15 @@ export default function Sidebar(props) {
             >
               Configuration
             </Button>
+            {/* {
+                          showSubmenu && <List>
+                              <ListItem>
+                                  <Button>
+                                      Add Product
+                                  </Button>
+                              </ListItem>
+                          </List>
+                      } */}
           </ListItem>
           <ListItem>
             <Button
