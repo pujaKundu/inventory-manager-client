@@ -54,7 +54,7 @@ export default function Sidebar(props) {
     setShowConfiguration(false);
   };
   const drawer = (
-    <div>
+    <div style={{ width: "200px" }}>
       <Toolbar />
       <Divider />
       <List>
@@ -67,15 +67,6 @@ export default function Sidebar(props) {
             >
               Configuration
             </Button>
-            {/* {
-                          showSubmenu && <List>
-                              <ListItem>
-                                  <Button>
-                                      Add Product
-                                  </Button>
-                              </ListItem>
-                          </List>
-                      } */}
           </ListItem>
           <ListItem>
             <Button
@@ -169,16 +160,10 @@ export default function Sidebar(props) {
         <Toolbar />
 
         {showConfiguration && <Configuration />}
-        {showPurchase && <Purchase />}
+        {showPurchase && <Purchase />} 
       </Box>
-      <Box>
-        <Routes>
-          <Route path="/configuration" element={<Configuration />} />
-        </Routes>
-        <Routes>
-          <Route path="/purchase" element={<Purchase />} />
-        </Routes>
-      </Box>
+     
     </Box>
+     
   );
 }
