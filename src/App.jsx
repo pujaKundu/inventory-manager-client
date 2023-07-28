@@ -7,6 +7,7 @@ import Configuration from "./components/Configuration/Configuration";
 import ProductList from "./components/Configuration/ProductList/ProductList";
 import Purchase from "./components/Purchase/Purchase";
 import Homepage from "./components/Homepage/Homepage";
+import AddProduct from "./components/Configuration/AddProuct/AddProduct";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/configuration" element={<Configuration />} />
           <Route path="/purchase" element={<Purchase />} />
           <Route path="/products" element={<ProductList />} />
+          <Route path="/addProduct" element={<AddProduct />} />
         </Routes>
       </Router>
     </div>
