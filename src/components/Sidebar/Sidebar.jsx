@@ -18,7 +18,7 @@ import {
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Link, NavLink, Route, Routes } from "react-router-dom";
 import Configuration from "../Configuration/Configuration";
 import Purchase from "../Purchase/Purchase";
 
@@ -46,8 +46,6 @@ export default function Sidebar(props) {
   };
   const toggleConfiguration = () => {
     setShowConfiguration(true);
-    setShowPurchase(false);
-    setShowSubmenu(true);
   };
   const togglePurchase = () => {
     setShowPurchase(true);
@@ -60,22 +58,25 @@ export default function Sidebar(props) {
       <List>
         <List>
           <ListItem>
-            <Button
-              color="inherit"
-              onClick={toggleConfiguration}
-              style={{ textDecoration: "none", color: "#3B185F" }}
-            >
-              Configuration
-            </Button>
+            <Link to="/configuration">
+              <Button
+                color="inherit"
+                style={{ textDecoration: "none", color: "#3B185F" }}
+              >
+                Configuration
+              </Button>
+            </Link>
           </ListItem>
           <ListItem>
-            <Button
-              color="inherit"
-              onClick={togglePurchase}
-              style={{ textDecoration: "none", color: "#3B185F" }}
-            >
-              Purchase
-            </Button>
+            <Link to="/purchase">
+              <Button
+                color="inherit"
+                onClick={togglePurchase}
+                style={{ textDecoration: "none", color: "#3B185F" }}
+              >
+                Purchase
+              </Button>
+            </Link>
           </ListItem>
         </List>
       </List>
@@ -158,12 +159,8 @@ export default function Sidebar(props) {
         }}
       >
         <Toolbar />
-
-        {showConfiguration && <Configuration />}
-        {showPurchase && <Purchase />} 
       </Box>
-     
+      side
     </Box>
-     
   );
 }

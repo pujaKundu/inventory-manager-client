@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import "./Configuration.scss";
-import ProductList from "./ProductList/ProductList";
 import { Link } from "react-router-dom";
+import Sidebar from "../Sidebar/Sidebar";
 
 const Configuration = () => {
-  const [showProducts, setShowProducts] = useState(false);
-  const [showSuppliers, setShowSuppliers] = useState(false);
-  const [showClients, setShowClients] = useState(false);
+  // const [showProducts, setShowProducts] = useState(false);
+  // const [showSuppliers, setShowSuppliers] = useState(false);
+  // const [showClients, setShowClients] = useState(false);
 
-  const handleManageProducts = () => {
-    setShowProducts(true);
-    setShowSuppliers(false);
-    setShowClients(false);
-  };
+  // const handleManageProducts = () => {
+  //   setShowProducts(true);
+  //   setShowSuppliers(false);
+  //   setShowClients(false);
+  // };
   return (
     <div className="container">
-      <Link to='/products' className="box" onClick={handleManageProducts}>
+      <Sidebar />
+      <Link to="/products" className="box">
         Manage Products
-      </Link>  
+      </Link>
       <div className="box">Manage Suppliers</div>
       <div className="box">Manage Clients</div>
     </div>
