@@ -4,14 +4,16 @@ import "./Product.scss";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDeleteProductMutation } from "../../../features/products/productsApi";
+import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
-  const { id, name, price, totalSales, stock, totalOrder, category } = product || {};
-  const [deleteProduct]=useDeleteProductMutation()
+  const { id, name, price, totalSales, stock, totalOrder, category } =
+    product || {};
+  const [deleteProduct] = useDeleteProductMutation();
   const handleDelete = (e) => {
     e.preventDefault();
-deleteProduct(id)
-  }
+    deleteProduct(id);
+  };
   return (
     <>
       <TableRow>
@@ -36,10 +38,11 @@ deleteProduct(id)
         <TableCell align="left" className="cell">
           {totalOrder}
         </TableCell>
-
-        <TableCell align="left" className="cell">
-          <EditIcon />
-        </TableCell>
+        <Link to={`/editProduct/${id}`}>
+          <TableCell align="left" className="cell">
+            <EditIcon />
+          </TableCell>
+        </Link>
         <TableCell align="left" className="cell">
           <DeleteIcon onClick={handleDelete} />
         </TableCell>

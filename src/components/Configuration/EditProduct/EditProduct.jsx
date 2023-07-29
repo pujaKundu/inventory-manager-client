@@ -2,26 +2,30 @@ import { Button, MenuItem, TextField } from "@mui/material";
 import React, { useState } from "react";
 import Sidebar from "../../Sidebar/Sidebar";
 import { useGetCategoriesQuery } from "../../../features/categories/catergoriesApi";
-import { useAddProductMutation } from "../../../features/products/productsApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../../../styles/styles.scss";
+import {
+  useEditProductMutation,
+  useGetProductQuery,
+} from "../../../features/products/productsApi";
 
-const AddProduct = () => {
+const EditProduct = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { data: product } = useGetProductQuery(id);
   const { data: categories } = useGetCategoriesQuery();
 
-  const [addProduct, { isSuccess }] = useAddProductMutation();
+  console.log(`id ${id}`);
 
-  if (!categories) {
-    return <div>Loading...</div>;
-  }
+  const [editProduct, { isSuccess }] = useEditProductMutation();
+
+  const loading = !categories || !product;
+
   //states for input values
   const [name, setName] = useState("");
-
   const [price, setPrice] = useState(0);
   const [totalOrder, setTotalOrder] = useState(0);
   const [stock, setStock] = useState(0);
-
   const [totalSales, setTotalSales] = useState(0);
   const [category, setCategory] = useState("");
 
@@ -35,7 +39,7 @@ const AddProduct = () => {
       totalSales,
       category,
     };
-    addProduct(formData);
+    editProduct({ productId: product?.id, data: formData });
     setName("");
     setPrice(0);
     setTotalOrder(0);
@@ -43,13 +47,18 @@ const AddProduct = () => {
     setTotalSales(0);
     setCategory("");
 
-    alert("Product added successfully");
+    alert("Product edited successfully");
     navigate("/products");
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Sidebar />
-      <h2>Add new product</h2>
+      <h2>Edit product</h2>
       <form action="" method="post" onSubmit={handleSubmit}>
         <div className="input-container">
           <TextField
@@ -57,7 +66,7 @@ const AddProduct = () => {
             id="outlined-basic"
             label="Product name"
             variant="outlined"
-            value={name}
+            defaultValue={product?.name}
             required
             onChange={(e) => setName(e.target.value)}
           />
@@ -67,7 +76,7 @@ const AddProduct = () => {
             label="Unit price"
             type="number"
             variant="outlined"
-            value={price}
+            defaultValue={product?.price}
             required
             onChange={(e) => setPrice(e.target.value)}
           />
@@ -77,7 +86,7 @@ const AddProduct = () => {
             label="In stock"
             type="number"
             variant="outlined"
-            value={stock}
+            defaultValue={product?.stock}
             required
             onChange={(e) => setStock(e.target.value)}
           />
@@ -89,7 +98,7 @@ const AddProduct = () => {
             label="Total order"
             type="number"
             variant="outlined"
-            value={totalOrder}
+            defaultValue={product?.totalOrder}
             required
             onChange={(e) => setTotalOrder(e.target.value)}
           />
@@ -99,7 +108,7 @@ const AddProduct = () => {
             label="Total sales"
             type="number"
             variant="outlined"
-            value={totalSales}
+            defaultValue={product?.totalSales}
             required
             onChange={(e) => setTotalSales(e.target.value)}
           />
@@ -108,7 +117,7 @@ const AddProduct = () => {
             id="outlined-select-category"
             select
             label="Select category"
-            value={category}
+            defaultValue={product?.category}
             required
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -127,4 +136,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;
