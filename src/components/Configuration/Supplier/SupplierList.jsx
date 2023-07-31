@@ -25,25 +25,43 @@ const SupplierList = () => {
     content = (
       <TableContainer component={Paper} sx={{ width: "75vw" }}>
         <h3>List of suppliers</h3>
-
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell className="th">ID</TableCell>
-                <TableCell align="left" className="th">
+                <TableCell
+                  align="left"
+                  className="th"
+                  sx={{ fontWeight: "bold" }}
+                >
                   Supplier name
                 </TableCell>
-                <TableCell align="left" className="th">
+                <TableCell
+                  align="left"
+                  className="th"
+                  sx={{ fontWeight: "bold" }}
+                >
                   Contact name
                 </TableCell>
-                <TableCell align="left" className="th">
+                <TableCell
+                  align="left"
+                  className="th"
+                  sx={{ fontWeight: "bold" }}
+                >
                   Email
                 </TableCell>
-                <TableCell align="left" className="th">
+                <TableCell
+                  align="left"
+                  className="th"
+                  sx={{ fontWeight: "bold" }}
+                >
                   Phone
                 </TableCell>
-                <TableCell align="left" className="th">
+                <TableCell
+                  align="left"
+                  className="th"
+                  sx={{ fontWeight: "bold" }}
+                >
                   Address
                 </TableCell>
               </TableRow>
@@ -64,7 +82,7 @@ const SupplierList = () => {
       <Link to="/addSupplier">
         <Button
           variant="contained"
-          sx={{ position: "absolute", marginLeft: "25%", marginTop: "1%" }}
+          sx={{ position: "absolute", marginLeft: "30%", marginTop: "1%" }}
         >
           <AddIcon />
           Add Supplier

@@ -15,8 +15,6 @@ const EditProduct = () => {
   const { data: product } = useGetProductQuery(id);
   const { data: categories } = useGetCategoriesQuery();
 
-  console.log(`id ${id}`);
-
   const [editProduct, { isSuccess }] = useEditProductMutation();
 
   const loading = !categories || !product;

@@ -32,7 +32,7 @@ export const suppliersApi = apiSlice.injectEndpoints({
     editSupplier: builder.mutation({
       query: ({ supplierId, data }) => ({
         url: `/suppliers/${supplierId}`,
-        method: "PATCH",
+        method: "PUT",
         body: data,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {

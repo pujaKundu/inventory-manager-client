@@ -19,23 +19,15 @@ import PurchaseRow from "./PurchaseRow";
 
 const Purchase = () => {
   let content = null;
-  const { data: purchases ,isLoading} = useGetPurchasesQuery();
+  const { data: purchases ,isLoading,isError} = useGetPurchasesQuery();
   if (isLoading) content = "Loading...";
   else if (isError) content = <p className="">There was an error occurred</p>;
-  else if (products?.length === 0) content = <p>No product found!</p>;
-  else if (products?.length > 0) {
+  else if (purchases?.length === 0) content = <p>No purchase found!</p>;
+  else if (purchases?.length > 0) {
     content = (
       <TableContainer component={Paper} sx={{ width: "75vw" }}>
         <h3>Purchase</h3>
-        <Link to="/addProduct">
-          <Button
-            variant="contained"
-            sx={{ position: "absolute", marginLeft: "25%", marginTop: "1%" }}
-          >
-            <AddIcon />
-            Add Product
-          </Button>
-        </Link>
+        
         <Table>
           <TableHead>
             <TableRow>
@@ -68,13 +60,22 @@ const Purchase = () => {
         </Table>
       </TableContainer>
     );
-   }
+  }
 
   return (
     <div style={{ height: 400, width: "60%", marginLeft: "20%" }}>
       <Sidebar />
-      {/* {content} */}
-      purchase
+      <Link to="/createPurchase">
+        <Button
+          variant="contained"
+          sx={{ position: "absolute", marginLeft: "25%", marginTop: "1%" }}
+        >
+          <AddIcon />
+          Create purchase order
+        </Button>
+      </Link>
+      {content}
+    
     </div>
   );
 };
