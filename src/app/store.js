@@ -4,6 +4,7 @@ import authSliceReducer from "../features/auth/authSlice";
 import productsReducer from "../features/products/productsSlice";
 import categoriesReducer from "../features/categories/categoriesSlice";
 import purchaseReducer from "../features/purchase/purchaseSlice";
+import suppliersReducer from "../features/suppliers/suppliersSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     auth: authSliceReducer,
     products: productsReducer,
     categories: categoriesReducer,
-    purchase:purchaseReducer,
+    purchase: purchaseReducer,
+    suppliers: suppliersReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddlewares) =>

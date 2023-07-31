@@ -9,6 +9,9 @@ import Purchase from "./components/Purchase/Purchase";
 import Homepage from "./components/Homepage/Homepage";
 import AddProduct from "./components/Configuration/AddProuct/AddProduct";
 import EditProduct from "./components/Configuration/EditProduct/EditProduct";
+import SupplierList from "./components/Configuration/Supplier/SupplierList";
+import AddSupplier from "./components/Configuration/Supplier/AddSupplier";
+import EditSupplier from "./components/Configuration/Supplier/EditSupplier";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
           <Route path="/products" element={<ProductList />} />
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/editProduct/:id" element={<EditProduct />} />
+          <Route path="/suppliers" element={<SupplierList />} />
+          <Route path="/addSupplier" element={<AddSupplier />} />
+          <Route path="/editSupplier/:id" element={<EditSupplier />} />
         </Routes>
       </Router>
     </div>

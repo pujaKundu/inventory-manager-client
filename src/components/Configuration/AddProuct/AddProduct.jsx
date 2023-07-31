@@ -17,11 +17,9 @@ const AddProduct = () => {
   }
   //states for input values
   const [name, setName] = useState("");
-
   const [price, setPrice] = useState(0);
   const [totalOrder, setTotalOrder] = useState(0);
   const [stock, setStock] = useState(0);
-
   const [totalSales, setTotalSales] = useState(0);
   const [category, setCategory] = useState("");
 

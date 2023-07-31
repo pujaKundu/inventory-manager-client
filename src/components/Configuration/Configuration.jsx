@@ -19,7 +19,7 @@ const Configuration = () => {
       <Link to="/products" className="box">
         Manage Products
       </Link>
-      <div className="box">Manage Suppliers</div>
+      <Link to='/suppliers' className="box">Manage Suppliers</Link>
       <div className="box">Manage Clients</div>
     </div>
   );
