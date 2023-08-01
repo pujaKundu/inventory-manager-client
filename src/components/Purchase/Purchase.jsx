@@ -31,24 +31,30 @@ const Purchase = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className="th">ID</TableCell>
+              
               <TableCell align="left" className="th">
                 Product name
               </TableCell>
               <TableCell align="left" className="th">
-                Category
+                Quantity
               </TableCell>
               <TableCell align="left" className="th">
                 Unit price
               </TableCell>
               <TableCell align="left" className="th">
-                Total sales
+                Vat(%)
               </TableCell>
               <TableCell align="left" className="th">
-                In stock
+                Total price
               </TableCell>
               <TableCell align="left" className="th">
-                Total order
+                Shiping address
+              </TableCell>
+              <TableCell align="left" className="th">
+                Supplier
+              </TableCell>
+              <TableCell align="left" className="th">
+                Status
               </TableCell>
             </TableRow>
           </TableHead>
