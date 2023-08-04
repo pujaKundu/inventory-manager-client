@@ -15,6 +15,8 @@ import SupplierList from "./components/Configuration/Supplier/SupplierList";
 import AddSupplier from "./components/Configuration/Supplier/AddSupplier";
 import EditSupplier from "./components/Configuration/Supplier/EditSupplier";
 import CreatePurchase from "./components/Purchase/CreatePurchase";
+import ApproveNavigation from "./components/Approval/ApproveNavigation";
+import Approval from "./components/Approval/Approval";
 
 function App({ children }) {
   return (
@@ -37,6 +39,8 @@ function App({ children }) {
             <Route path="/suppliers" element={<SupplierList />} />
             <Route path="/addSupplier" element={<AddSupplier />} />
             <Route path="/editSupplier/:id" element={<EditSupplier />} />
+            <Route path="/approval" element={<ApproveNavigation />} />
+            <Route path="/approve-purchase" element={<Approval />} />
           </Routes>
         </Router>
       </LocalizationProvider>

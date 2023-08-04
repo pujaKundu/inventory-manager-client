@@ -44,13 +44,13 @@ export default function Sidebar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const toggleConfiguration = () => {
-    setShowConfiguration(true);
-  };
-  const togglePurchase = () => {
-    setShowPurchase(true);
-    setShowConfiguration(false);
-  };
+  // const toggleConfiguration = () => {
+  //   setShowConfiguration(true);
+  // };
+  // const togglePurchase = () => {
+  //   setShowPurchase(true);
+  //   setShowConfiguration(false);
+  // };
   const drawer = (
     <div style={{ width: "200px" }}>
       <Toolbar />
@@ -71,10 +71,19 @@ export default function Sidebar(props) {
             <Link to="/purchase">
               <Button
                 color="inherit"
-                onClick={togglePurchase}
                 style={{ textDecoration: "none", color: "#3B185F" }}
               >
                 Purchase
+              </Button>
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/approval">
+              <Button
+                color="inherit"
+                style={{ textDecoration: "none", color: "#3B185F" }}
+              >
+                Approval
               </Button>
             </Link>
           </ListItem>

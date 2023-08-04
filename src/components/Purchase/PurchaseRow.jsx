@@ -39,16 +39,14 @@ const PurchaseRow = ({ purchase }) => {
         {supplier}
       </TableCell>
       <TableCell align="left" className="cell">
-        {isApproved === true ? <span>Approved</span> : <span>Pending</span>}
+        {isApproved === "Approved" ? (
+          <span style={{ color: "#208a2e", fontWeight: "bold" }}>Approved</span>
+        ) : isApproved === "Canceled" ? (
+          <span style={{ color: "#eb4034", fontWeight: "bold" }}>Canceled</span>
+        ) : (
+          <span style={{ color: "#e6bf27", fontWeight: "bold" }}>Pending</span>
+        )}
       </TableCell>
-      {/* <Link to={`/editPurchase/${id}`}>
-          <TableCell align="left" className="cell">
-            <EditIcon />
-          </TableCell>
-        </Link>
-        <TableCell align="left" className="cell">
-          <DeleteIcon onClick={handleDelete} />
-        </TableCell> */}
     </TableRow>
   );
 };

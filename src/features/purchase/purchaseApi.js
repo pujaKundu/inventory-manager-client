@@ -55,6 +55,32 @@ export const purchaseApi = apiSlice.injectEndpoints({
         } catch (err) {}
       },
     }),
+    editPurchaseStatus: builder.mutation({
+      query: ({ purchaseId, isApproved }) => ({
+        url: `/purchases/${purchaseId}`,
+        method: "PATCH",
+        body: { isApproved },
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const purchase = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData(
+              "getPurchases",
+              undefined,
+              (draft) => {
+                const index = draft.findIndex(
+                  (t) => t.id === purchase?.data?.id
+                );
+                if (index != -1) {
+                  draft[index].isApproved = purchase?.data.isApproved;
+                }
+              }
+            )
+          );
+        } catch (err) {}
+      },
+    }),
     deletePurchase: builder.mutation({
       query: (id) => ({
         url: `/purchases/${id}`,
@@ -97,5 +123,6 @@ export const {
   useGetPurchaseQuery,
   useAddPurchaseMutation,
   useEditPurchaseMutation,
+  useEditPurchaseStatusMutation,
   useDeletePurchaseMutation,
 } = purchaseApi;
