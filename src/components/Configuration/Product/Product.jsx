@@ -5,6 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDeleteProductMutation } from "../../../features/products/productsApi";
 import { Link } from "react-router-dom";
+import "../../../styles/styles.scss";
 
 const Product = ({ product }) => {
   const { id, name, price, totalSales, stock, totalOrder, category } =
@@ -40,11 +41,11 @@ const Product = ({ product }) => {
         </TableCell>
         <Link to={`/editProduct/${id}`}>
           <TableCell align="left" className="cell">
-            <EditIcon />
+            <EditIcon className="icon" />
           </TableCell>
         </Link>
         <TableCell align="left" className="cell">
-          <DeleteIcon onClick={handleDelete} />
+          <DeleteIcon className="icon"  onClick={handleDelete} />
         </TableCell>
       </TableRow>
     </>

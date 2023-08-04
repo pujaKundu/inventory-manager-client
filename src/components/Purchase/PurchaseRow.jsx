@@ -1,6 +1,7 @@
 import { TableCell, TableRow } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styles/styles.scss";
 
 const PurchaseRow = ({ purchase }) => {
   const {
@@ -15,7 +16,15 @@ const PurchaseRow = ({ purchase }) => {
     isApproved,
   } = purchase;
   return (
-    <TableRow>
+    <TableRow
+      className={
+        isApproved === "Approved"
+          ? "row-green"
+          : isApproved === "Canceled"
+          ? "row-red"
+          : ""
+      }
+    >
       <TableCell component="th" scope="row">
         {product}
       </TableCell>

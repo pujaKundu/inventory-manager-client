@@ -29,31 +29,30 @@ const Approval = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Product name
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Quantity
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Unit price
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Vat(%)
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Total price
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Shiping address
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Supplier
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Status
               </TableCell>
-              
             </TableRow>
           </TableHead>
           <TableBody>

@@ -4,6 +4,7 @@ import { useEditPurchaseStatusMutation } from "../../features/purchase/purchaseA
 import { useState } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import CancelIcon from "@mui/icons-material/Cancel";
+import '../../styles/styles.scss'
 
 const ApprovalRow = ({ purchase }) => {
   const {
@@ -64,25 +65,18 @@ const ApprovalRow = ({ purchase }) => {
       </TableCell>
       <TableCell align="left" className="cell">
         <DoneIcon
+          className="icon"
           onClick={handleEditStatus}
-          sx={{ color: "green", cursor: "pointer" }}
+          sx={{ color: "#208a2e", cursor: "pointer" }}
         />
       </TableCell>
       <TableCell align="left" className="cell">
         <CancelIcon
+          className="icon"
           onClick={handleCancelStatus}
-          sx={{ color: "red", cursor: "pointer" }}
+          sx={{ color: "#eb4034", cursor: "pointer" }}
         />
       </TableCell>
-
-      {/* <Link to={`/editPurchase/${id}`}>
-          <TableCell align="left" className="cell">
-            <EditIcon />
-          </TableCell>
-        </Link>
-        <TableCell align="left" className="cell">
-          <DeleteIcon onClick={handleDelete} />
-        </TableCell> */}
     </TableRow>
   );
 };

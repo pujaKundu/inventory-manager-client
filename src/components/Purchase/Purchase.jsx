@@ -1,4 +1,5 @@
 import * as React from "react";
+import "../../styles/styles.scss";
 
 import {
   Button,
@@ -19,7 +20,7 @@ import PurchaseRow from "./PurchaseRow";
 
 const Purchase = () => {
   let content = null;
-  const { data: purchases ,isLoading,isError} = useGetPurchasesQuery();
+  const { data: purchases, isLoading, isError } = useGetPurchasesQuery();
   if (isLoading) content = "Loading...";
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (purchases?.length === 0) content = <p>No purchase found!</p>;
@@ -27,33 +28,32 @@ const Purchase = () => {
     content = (
       <TableContainer component={Paper} sx={{ width: "75vw" }}>
         <h3>Purchase</h3>
-        
+
         <Table>
           <TableHead>
             <TableRow>
-              
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Product name
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Quantity
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Unit price
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Vat(%)
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Total price
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Shiping address
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Supplier
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Status
               </TableCell>
             </TableRow>
@@ -81,7 +81,6 @@ const Purchase = () => {
         </Button>
       </Link>
       {content}
-    
     </div>
   );
 };
