@@ -169,7 +169,7 @@ export default function Sidebar(props) {
       >
         <Toolbar />
       </Box>
-      side
+      
     </Box>
   );
 }

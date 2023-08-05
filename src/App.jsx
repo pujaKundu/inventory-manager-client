@@ -17,6 +17,7 @@ import EditSupplier from "./components/Configuration/Supplier/EditSupplier";
 import CreatePurchase from "./components/Purchase/CreatePurchase";
 import ApproveNavigation from "./components/Approval/ApproveNavigation";
 import Approval from "./components/Approval/Approval";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App({ children }) {
   return (
@@ -29,6 +30,7 @@ function App({ children }) {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/configuration" element={<Configuration />} />
             <Route path="/purchase" element={<Purchase />} />
