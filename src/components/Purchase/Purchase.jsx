@@ -17,10 +17,23 @@ import AddIcon from "@mui/icons-material/Add";
 import Sidebar from "../Sidebar/Sidebar";
 import { useGetPurchasesQuery } from "../../features/purchase/purchaseApi";
 import PurchaseRow from "./PurchaseRow";
+import '../../styles/styles.scss'
 
 const Purchase = () => {
+  const [selectedFilter, setSelectedFilter] = React.useState("All");
   let content = null;
   const { data: purchases, isLoading, isError } = useGetPurchasesQuery();
+
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
+
+  const filteredPurchases =
+    selectedFilter === "All"
+      ? purchases
+      : purchases.filter((purchase) => purchase.isApproved === selectedFilter);
+
+
   if (isLoading) content = "Loading...";
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (purchases?.length === 0) content = <p>No purchase found!</p>;
@@ -59,9 +72,18 @@ const Purchase = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {purchases.map((purchase) => (
+            {/* {purchases.map((purchase) => (
               <PurchaseRow key={purchase.id} purchase={purchase} />
-            ))}
+            ))} */}
+            {filteredPurchases.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={8}>No purchases found!</TableCell>
+              </TableRow>
+            ) : (
+              filteredPurchases.map((purchase) => (
+                <PurchaseRow key={purchase.id} purchase={purchase} />
+              ))
+            )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -71,6 +93,28 @@ const Purchase = () => {
   return (
     <div style={{ height: 400, width: "60%", marginLeft: "20%" }}>
       <Sidebar />
+      <div style={{ marginTop: "1rem" }}>
+        <select
+          id="filter"
+          name="filter"
+          value={selectedFilter}
+          onChange={handleFilterChange}
+          className="filter"
+        >
+          <option className="filter-option" value="All">
+            All
+          </option>
+          <option className="filter-option" value="Approved">
+            Approved
+          </option>
+          <option className="filter-option" value="Canceled">
+            Canceled
+          </option>
+          <option className="filter-option" value="Pending">
+            Pending
+          </option>
+        </select>
+      </div>
       <Link to="/createPurchase">
         <Button
           variant="contained"

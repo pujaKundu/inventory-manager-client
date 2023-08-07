@@ -15,3 +15,21 @@
 .row-red {
   background-color: rgb(252, 232, 230);
 }
+
+.filter {
+  width: 160px;
+  margin-right: 80%;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border: none;
+  border-radius: 5%;
+  margin-bottom: 5px;
+}
+.filter-option {
+  border: none;
+  border-radius: 5%;
+  padding: 10px 0;
+}
+.filter > option:hover {
+  background-color: rgb(158, 208, 241);
+}

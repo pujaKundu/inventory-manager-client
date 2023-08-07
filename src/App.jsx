@@ -18,6 +18,9 @@ import CreatePurchase from "./components/Purchase/CreatePurchase";
 import ApproveNavigation from "./components/Approval/ApproveNavigation";
 import Approval from "./components/Approval/Approval";
 import Dashboard from "./components/Dashboard/Dashboard";
+import ClientList from "./components/Configuration/Client/ClientList";
+import AddClient from "./components/Configuration/Client/AddClient";
+import EditClient from "./components/Configuration/Client/EditClient";
 
 function App({ children }) {
   return (
@@ -41,6 +44,9 @@ function App({ children }) {
             <Route path="/suppliers" element={<SupplierList />} />
             <Route path="/addSupplier" element={<AddSupplier />} />
             <Route path="/editSupplier/:id" element={<EditSupplier />} />
+            <Route path="/clients" element={<ClientList />} />
+            <Route path="/addClient" element={<AddClient />} />
+            <Route path="/editClient/:id" element={<EditClient />} />
             <Route path="/approval" element={<ApproveNavigation />} />
             <Route path="/approve-purchase" element={<Approval />} />
           </Routes>

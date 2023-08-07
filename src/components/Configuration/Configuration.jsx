@@ -13,7 +13,9 @@ const Configuration = () => {
       <Link to="/suppliers" className="box">
         Manage Suppliers
       </Link>
-      <div className="box">Manage Clients</div>
+      <Link to="/clients" className="box">
+        Manage Clients
+      </Link>
     </div>
   );
 };
