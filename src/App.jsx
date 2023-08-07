@@ -23,6 +23,7 @@ import AddClient from "./components/Configuration/Client/AddClient";
 import EditClient from "./components/Configuration/Client/EditClient";
 import Sales from "./components/sales/Sales";
 import CreateSales from "./components/sales/CreateSales";
+import SalesApproval from "./components/Approval/SalesApproval";
 
 function App({ children }) {
   return (
@@ -51,6 +52,7 @@ function App({ children }) {
             <Route path="/editClient/:id" element={<EditClient />} />
             <Route path="/approval" element={<ApproveNavigation />} />
             <Route path="/approve-purchase" element={<Approval />} />
+            <Route path="/approve-sales" element={<SalesApproval />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/create-sales" element={<CreateSales />} />
           </Routes>

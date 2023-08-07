@@ -47,7 +47,7 @@ export const salesApi = apiSlice.injectEndpoints({
     }),
     editSaleStatus: builder.mutation({
       query: ({ saleId, isApproved }) => ({
-        url: `/sales/${saleId}`,
+        url: `/orders/${saleId}`,
         method: "PATCH",
         body: { isApproved },
       }),

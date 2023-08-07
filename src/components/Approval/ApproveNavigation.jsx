@@ -10,9 +10,9 @@ const ApproveNavigation = () => {
       <Link to="/approve-purchase">
         <Button>Manage purchase</Button>
       </Link>
-      {/* <Link to="/approve-sales">
+      <Link to="/approve-sales">
         <Button>Manage sales</Button>
-      </Link> */}
+      </Link>
     </div>
   );
 };
