@@ -15,8 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import Sidebar from "../Sidebar/Sidebar";
-import { useGetPurchasesQuery } from "../../features/purchase/purchaseApi";
-import PurchaseRow from "./PurchaseRow";
+import { useGetSalesQuery } from "../../features/sales/salesApi";
 import "../../styles/styles.scss";
 import SelectMenu from "../Shared/SelectMenu";
 import SalesRow from "./SalesRow";
@@ -24,12 +23,12 @@ import SalesRow from "./SalesRow";
 const Sales = () => {
   const [selectedFilter, setSelectedFilter] = React.useState("All");
   let content = null;
-  const { data: purchases, isLoading, isError } = useGetPurchasesQuery();
+  const { data: sales, isLoading, isError } = useGetSalesQuery();
   //get filtered data
-  const filteredPurchases =
+  const filteredSales =
     selectedFilter === "All"
-      ? purchases
-      : purchases.filter((purchase) => purchase.isApproved === selectedFilter);
+      ? sales
+      : sales.filter((sale) => sale.isApproved === selectedFilter);
 
   const handleFilterChange = (event) => {
     setSelectedFilter(event.target.value);
@@ -37,8 +36,8 @@ const Sales = () => {
 
   if (isLoading) content = "Loading...";
   else if (isError) content = <p className="">There was an error occurred</p>;
-  else if (purchases?.length === 0) content = <p>No purchase found!</p>;
-  else if (purchases?.length > 0) {
+  else if (sales?.length === 0) content = <p>No sales found!</p>;
+  else if (sales?.length > 0) {
     content = (
       <TableContainer component={Paper} sx={{ width: "75vw" }}>
         <h3>Sales</h3>
@@ -72,13 +71,13 @@ const Sales = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredPurchases.length === 0 ? (
+            {filteredSales.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8}>No purchases found!</TableCell>
+                <TableCell colSpan={8}>No sales found!</TableCell>
               </TableRow>
             ) : (
-              filteredPurchases.map((purchase) => (
-                <SalesRow key={purchase.id} purchase={purchase} />
+              filteredSales.map((sale) => (
+                <SalesRow key={sale.id} sale={sale} />
               ))
             )}
           </TableBody>
@@ -102,7 +101,7 @@ const Sales = () => {
           sx={{ position: "absolute", marginLeft: "25%", marginTop: "1%" }}
         >
           <AddIcon />
-          Create purchase order
+          Create sale order
         </Button>
       </Link>
       {content}

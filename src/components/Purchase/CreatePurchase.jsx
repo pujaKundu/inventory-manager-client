@@ -17,7 +17,7 @@ const CreatePurchase = () => {
   const currDate = new Date();
   const formattedDate = currDate.toISOString().split("T")[0];
 
-  const { data: suppliers } = useGetSuppliersQuery();
+  const { data: clients } = useGetSuppliersQuery();
   const { data: categories } = useGetCategoriesQuery();
   const { data: products } = useGetProductsQuery();
 

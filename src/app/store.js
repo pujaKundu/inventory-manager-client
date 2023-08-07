@@ -6,6 +6,7 @@ import categoriesReducer from "../features/categories/categoriesSlice";
 import purchaseReducer from "../features/purchase/purchaseSlice";
 import suppliersReducer from "../features/suppliers/suppliersSlice";
 import clientsReducer from "../features/client/clientSlice";
+import salesReducer from "../features/sales/salesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     categories: categoriesReducer,
     purchase: purchaseReducer,
     suppliers: suppliersReducer,
-    clients:clientsReducer
+    clients: clientsReducer,
+    sales: salesReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddlewares) =>

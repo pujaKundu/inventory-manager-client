@@ -1,9 +1,9 @@
 import { Alert, Button, MenuItem, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetSuppliersQuery } from "../../features/suppliers/suppliersApi";
 import { useGetCategoriesQuery } from "../../features/categories/catergoriesApi";
-import { useAddPurchaseMutation } from "../../features/purchase/purchaseApi";
+import { useGetClientsQuery } from "../../features/client/clientApi";
+import { useAddSaleMutation } from "../../features/sales/salesApi";
 import Sidebar from "../Sidebar/Sidebar";
 import { useGetProductsQuery } from "../../features/products/productsApi";
 import { calculateTotalPrice } from "../../../utils/calculateVat";
@@ -17,11 +17,11 @@ const CreateSales = () => {
   const currDate = new Date();
   const formattedDate = currDate.toISOString().split("T")[0];
 
-  const { data: suppliers } = useGetSuppliersQuery();
+  const { data: clients } = useGetClientsQuery();
   const { data: categories } = useGetCategoriesQuery();
   const { data: products } = useGetProductsQuery();
 
-  const [addPurchase] = useAddPurchaseMutation();
+  const [addSale] = useAddSaleMutation();
 
   const [createDate, setCreateDate] = useState(formattedDate);
   const [office, setOffice] = useState("");
@@ -29,7 +29,7 @@ const CreateSales = () => {
   const [shippingAddress, setShippingAddress] = useState("");
   const [category, setCategory] = useState("");
   const [product, setProduct] = useState("");
-  const [supplier, setSupplier] = useState("");
+  const [client, setClient] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [sellingPrice, setSellingPrice] = useState(0);
   const [vat, setVat] = useState(0);
@@ -43,7 +43,7 @@ const CreateSales = () => {
     alert("Please enter non-negative value");
   }
 
-  if (!categories || !suppliers || !products) {
+  if (!categories || !clients || !products) {
     return <div>Loading...</div>;
   }
   const handleSubmit = (e) => {
@@ -56,19 +56,19 @@ const CreateSales = () => {
       category,
       product,
       quantity,
-      supplier,
+      client,
       sellingPrice,
       vat,
       isApproved,
       totalPrice,
     };
-    addPurchase(formData);
+    addSale(formData);
     setCreateDate("");
     setOffice("");
     setReceiveDate("");
     setShippingAddress("");
     setCategory("");
-    setSupplier("");
+    setClient("");
     setProduct("");
     setQuantity(0);
     setPrice(0);
@@ -76,14 +76,14 @@ const CreateSales = () => {
     setVat(0);
 
     //notification
-    alert("Purchase order created");
-    navigate("/purchase");
+    alert("Sales order created");
+    navigate("/sales");
   };
   return (
     <div>
       <Sidebar />
       <h3 sx={{ position: "absolute", left: 0, marginLeft: "4%" }}>
-        Create purchase order
+        Create sales order
       </h3>
 
       <form action="" method="post" onSubmit={handleSubmit}>
@@ -208,21 +208,21 @@ const CreateSales = () => {
             sx={{ margin: "15px", width: "225px" }}
             id="outlined-select-category"
             select
-            label="Select supplier"
-            value={supplier}
+            label="Select client"
+            value={client}
             required
-            onChange={(e) => setSupplier(e.target.value)}
+            onChange={(e) => setClient(e.target.value)}
           >
-            {suppliers.map((option) => (
-              <MenuItem key={option.id} value={option.supplierName}>
-                {option.supplierName}
+            {clients.map((option) => (
+              <MenuItem key={option.id} value={option.clientName}>
+                {option.clientName}
               </MenuItem>
             ))}
           </TextField>
         </div>
 
         <div>
-          <h5>Confirm purchase</h5>
+          <h5>Confirm order</h5>
           <ShowConfirmedData
             product={product}
             category={category}

@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/styles.scss";
 
-const SalesRow = ({ purchase }) => {
+const SalesRow = ({ sale }) => {
   const {
     id,
     product,
@@ -12,9 +12,9 @@ const SalesRow = ({ purchase }) => {
     vat,
     totalPrice,
     shippingAddress,
-    supplier,
+    client,
     isApproved,
-  } = purchase;
+  } = sale;
   return (
     <TableRow
       className={
@@ -45,7 +45,7 @@ const SalesRow = ({ purchase }) => {
         {shippingAddress}
       </TableCell>
       <TableCell align="left" className="cell">
-        {supplier}
+        {client}
       </TableCell>
       <TableCell align="left" className="cell">
         {isApproved === "Approved" ? (
