@@ -19,8 +19,9 @@ import { useGetPurchasesQuery } from "../../features/purchase/purchaseApi";
 import PurchaseRow from "./PurchaseRow";
 import "../../styles/styles.scss";
 import SelectMenu from "../Shared/SelectMenu";
+import SalesRow from "./SalesRow";
 
-const Purchase = () => {
+const Sales = () => {
   const [selectedFilter, setSelectedFilter] = React.useState("All");
   let content = null;
   const { data: purchases, isLoading, isError } = useGetPurchasesQuery();
@@ -40,7 +41,7 @@ const Purchase = () => {
   else if (purchases?.length > 0) {
     content = (
       <TableContainer component={Paper} sx={{ width: "75vw" }}>
-        <h3>Purchase</h3>
+        <h3>Sales</h3>
         <Table>
           <TableHead>
             <TableRow>
@@ -77,7 +78,7 @@ const Purchase = () => {
               </TableRow>
             ) : (
               filteredPurchases.map((purchase) => (
-                <PurchaseRow key={purchase.id} purchase={purchase} />
+                <SalesRow key={purchase.id} purchase={purchase} />
               ))
             )}
           </TableBody>
@@ -95,7 +96,7 @@ const Purchase = () => {
         handleFilterChange={handleFilterChange}
       />
 
-      <Link to="/createPurchase">
+      <Link to="/create-sales">
         <Button
           variant="contained"
           sx={{ position: "absolute", marginLeft: "25%", marginTop: "1%" }}
@@ -109,4 +110,4 @@ const Purchase = () => {
   );
 };
 
-export default Purchase;
+export default Sales;

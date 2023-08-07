@@ -1,4 +1,4 @@
-import { Button, MenuItem, TextField, Typography } from "@mui/material";
+import { Alert, Button, MenuItem, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetSuppliersQuery } from "../../features/suppliers/suppliersApi";
@@ -6,12 +6,12 @@ import { useGetCategoriesQuery } from "../../features/categories/catergoriesApi"
 import { useAddPurchaseMutation } from "../../features/purchase/purchaseApi";
 import Sidebar from "../Sidebar/Sidebar";
 import { useGetProductsQuery } from "../../features/products/productsApi";
-import ShowConfirmedData from "../Shared/ShowConfirmedData";
 import { calculateTotalPrice } from "../../../utils/calculateVat";
+import ShowConfirmedData from "../Shared/ShowConfirmedData";
 
 const offices = [{ id: 1, name: "MGM" }];
 
-const CreatePurchase = () => {
+const CreateSales = () => {
   const navigate = useNavigate();
   //get today date
   const currDate = new Date();
@@ -245,4 +245,4 @@ const CreatePurchase = () => {
   );
 };
 
-export default CreatePurchase;
+export default CreateSales;

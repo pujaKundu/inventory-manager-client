@@ -58,6 +58,16 @@ export default function Sidebar(props) {
       <List>
         <List>
           <ListItem>
+            <Link to="/homepage">
+              <Button
+                color="inherit"
+                style={{ textDecoration: "none", color: "#3B185F" }}
+              >
+                Dashboard
+              </Button>
+            </Link>
+          </ListItem>
+          <ListItem>
             <Link to="/configuration">
               <Button
                 color="inherit"
@@ -74,6 +84,16 @@ export default function Sidebar(props) {
                 style={{ textDecoration: "none", color: "#3B185F" }}
               >
                 Purchase
+              </Button>
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link to="/sales">
+              <Button
+                color="inherit"
+                style={{ textDecoration: "none", color: "#3B185F" }}
+              >
+                Sales
               </Button>
             </Link>
           </ListItem>
@@ -169,7 +189,6 @@ export default function Sidebar(props) {
       >
         <Toolbar />
       </Box>
-      
     </Box>
   );
 }
