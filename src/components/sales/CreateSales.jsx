@@ -28,7 +28,7 @@ const CreateSales = () => {
   const [receiveDate, setReceiveDate] = useState("");
   const [shippingAddress, setShippingAddress] = useState("");
   const [category, setCategory] = useState("");
-  const [product, setProduct] = useState("");
+  const [productId, setProductId] = useState("");
   const [client, setClient] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [sellingPrice, setSellingPrice] = useState(0);
@@ -46,6 +46,8 @@ const CreateSales = () => {
   if (!categories || !clients || !products) {
     return <div>Loading...</div>;
   }
+
+  console.log("product id in create sales", productId);
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
@@ -54,7 +56,7 @@ const CreateSales = () => {
       receiveDate,
       shippingAddress,
       category,
-      product,
+      productId,
       quantity,
       client,
       sellingPrice,
@@ -69,9 +71,9 @@ const CreateSales = () => {
     setShippingAddress("");
     setCategory("");
     setClient("");
-    setProduct("");
+    setProductId("");
     setQuantity(0);
-    setPrice(0);
+
     setSellingPrice(0);
     setVat(0);
 
@@ -120,12 +122,12 @@ const CreateSales = () => {
             id="outlined-select-category"
             select
             label="Select product"
-            value={product}
+            value={productId}
             required
-            onChange={(e) => setProduct(e.target.value)}
+            onChange={(e) => setProductId(e.target.value)}
           >
             {products.map((option) => (
-              <MenuItem key={option.id} value={option.name}>
+              <MenuItem key={option.id} value={option.id}>
                 {option.name}
               </MenuItem>
             ))}
@@ -224,7 +226,7 @@ const CreateSales = () => {
         <div>
           <h5>Confirm order</h5>
           <ShowConfirmedData
-            product={product}
+            productId={productId}
             category={category}
             quantity={quantity}
             priceOfSingleItem={sellingPrice}

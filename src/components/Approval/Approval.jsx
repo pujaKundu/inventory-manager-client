@@ -24,7 +24,7 @@ const Approval = () => {
   else if (purchases?.length > 0) {
     content = (
       <TableContainer component={Paper} sx={{ width: "75vw" }}>
-        <h3>Manage Purchase</h3>
+        <h3>Approve Purchase</h3>
 
         <Table>
           <TableHead>

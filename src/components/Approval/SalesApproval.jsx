@@ -9,8 +9,6 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import AddIcon from "@mui/icons-material/Add";
 import Sidebar from "../Sidebar/Sidebar";
 import SalesApprovalRow from "../../components/Approval/SalesApprovalRow";
 import { useGetSalesQuery } from "../../features/sales/salesApi";
@@ -25,8 +23,7 @@ const SalesApproval = () => {
   else if (sales?.length > 0) {
     content = (
       <TableContainer component={Paper} sx={{ width: "75vw" }}>
-        <h3>Manage Sales</h3>
-
+        <h3>Approve Sales</h3>
         <Table>
           <TableHead>
             <TableRow>
@@ -68,7 +65,6 @@ const SalesApproval = () => {
   return (
     <div style={{ height: 400, width: "60%", marginLeft: "20%" }}>
       <Sidebar />
-
       {content}
     </div>
   );

@@ -5,11 +5,15 @@ import DoneIcon from "@mui/icons-material/Done";
 import CancelIcon from "@mui/icons-material/Cancel";
 import "../../styles/styles.scss";
 import { useEditSaleStatusMutation } from "../../features/sales/salesApi";
+import {
+  useEditProductStockMutation,
+  useGetProductQuery,
+} from "../../features/products/productsApi";
 
 const SalesApprovalRow = ({ sale }) => {
   const {
     id,
-    product,
+    productId,
     quantity,
     sellingPrice,
     vat,
@@ -20,9 +24,39 @@ const SalesApprovalRow = ({ sale }) => {
   } = sale;
 
   const [editSaleStatus, { isSuccess }] = useEditSaleStatusMutation();
+  //for product stock update
+  console.log(`productId ${productId}`)
+  const { data: productData } = useGetProductQuery(productId);
+  const [editProductStock] = useEditProductStockMutation();
 
-  const handleEditStatus = () => {
-    editSaleStatus({ saleId: sale?.id, isApproved: "Approved" });
+  const qty = parseInt(quantity);
+  console.log(productData)
+  console.log(`order korsi koyta `, qty);
+  console.log(`stock e ache koyta `, productData?.stock);
+  const handleEditStatus = async () => {
+    // editSaleStatus({ saleId: sale?.id, isApproved: "Approved" });
+    try {
+      // Check if the product has enough stock
+      if (productData && productData.stock >= qty) {
+        // If yes, update the sale status to "Approved"
+        await editSaleStatus({ saleId: id, isApproved: "Approved" });
+
+        // Update the product's stock
+        await editProductStock({
+          productId: productData.id,
+          stock: productData.stock - qty,
+        });
+      } else {
+        // Handle insufficient stock scenario here (e.g., show an error message)
+        console.log(
+          "Insufficient stock for the product:",
+          productId,
+          productData.stock
+        );
+      }
+    } catch (error) {
+      console.error("Error updating sale status or product stock:", error);
+    }
   };
   const handleCancelStatus = () => {
     editSaleStatus({ saleId: sale?.id, isApproved: "Canceled" });
@@ -30,7 +64,7 @@ const SalesApprovalRow = ({ sale }) => {
   return (
     <TableRow>
       <TableCell component="th" scope="row">
-        {product}
+        {productId}
       </TableCell>
       <TableCell align="left" className="cell">
         {quantity}
