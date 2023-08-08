@@ -30,6 +30,9 @@ const Approval = () => {
           <TableHead>
             <TableRow>
               <TableCell align="left" className="th title">
+                Product id
+              </TableCell>
+              <TableCell align="left" className="th title">
                 Product name
               </TableCell>
               <TableCell align="left" className="th title">
@@ -52,6 +55,12 @@ const Approval = () => {
               </TableCell>
               <TableCell align="left" className="th title">
                 Status
+              </TableCell>
+              <TableCell align="left" className="th title">
+                Approve
+              </TableCell>
+              <TableCell align="left" className="th title">
+                Cancel
               </TableCell>
             </TableRow>
           </TableHead>

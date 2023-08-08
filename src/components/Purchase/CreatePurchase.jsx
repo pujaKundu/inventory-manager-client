@@ -17,7 +17,7 @@ const CreatePurchase = () => {
   const currDate = new Date();
   const formattedDate = currDate.toISOString().split("T")[0];
 
-  const { data: clients } = useGetSuppliersQuery();
+  const { data: suppliers } = useGetSuppliersQuery();
   const { data: categories } = useGetCategoriesQuery();
   const { data: products } = useGetProductsQuery();
 
@@ -28,7 +28,7 @@ const CreatePurchase = () => {
   const [receiveDate, setReceiveDate] = useState("");
   const [shippingAddress, setShippingAddress] = useState("");
   const [category, setCategory] = useState("");
-  const [product, setProduct] = useState("");
+  const [productId, setProductId] = useState("");
   const [supplier, setSupplier] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [sellingPrice, setSellingPrice] = useState(0);
@@ -54,7 +54,7 @@ const CreatePurchase = () => {
       receiveDate,
       shippingAddress,
       category,
-      product,
+      productId,
       quantity,
       supplier,
       sellingPrice,
@@ -69,7 +69,7 @@ const CreatePurchase = () => {
     setShippingAddress("");
     setCategory("");
     setSupplier("");
-    setProduct("");
+    setProductId("");
     setQuantity(0);
     setPrice(0);
     setSellingPrice(0);
@@ -120,12 +120,12 @@ const CreatePurchase = () => {
             id="outlined-select-category"
             select
             label="Select product"
-            value={product}
+            value={productId}
             required
-            onChange={(e) => setProduct(e.target.value)}
+            onChange={(e) => setProductId(e.target.value)}
           >
             {products.map((option) => (
-              <MenuItem key={option.id} value={option.name}>
+              <MenuItem key={option.id} value={option.id}>
                 {option.name}
               </MenuItem>
             ))}
@@ -224,7 +224,7 @@ const CreatePurchase = () => {
         <div>
           <h5>Confirm purchase</h5>
           <ShowConfirmedData
-            product={product}
+            productId={productId}
             category={category}
             quantity={quantity}
             priceOfSingleItem={sellingPrice}

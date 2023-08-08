@@ -4,12 +4,16 @@ import { useEditPurchaseStatusMutation } from "../../features/purchase/purchaseA
 import { useState } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import CancelIcon from "@mui/icons-material/Cancel";
-import '../../styles/styles.scss'
+import "../../styles/styles.scss";
+import {
+  useEditProductStockPurchaseMutation,
+  useGetProductQuery,
+} from "../../features/products/productsApi";
 
 const ApprovalRow = ({ purchase }) => {
   const {
     id,
-    product,
+    productId,
     quantity,
     sellingPrice,
     vat,
@@ -20,21 +24,61 @@ const ApprovalRow = ({ purchase }) => {
   } = purchase;
 
   const [editPurchaseStatus, { isSuccess }] = useEditPurchaseStatusMutation();
-  const [isPurchaseApproved, setIsPurchaseApproved] = useState("");
 
-  console.log(isApproved);
-  console.log("updated ", isApproved);
+  //for product stock update
 
-  const handleEditStatus = () => {
-    editPurchaseStatus({ purchaseId: purchase?.id, isApproved: "Approved" });
+  const { data: productData } = useGetProductQuery(productId);
+  const [editProductStockPurchase] = useEditProductStockPurchaseMutation();
+
+  const qty = parseInt(quantity);
+  const updatedOrder = productData?.totalOrder + totalPrice;
+
+  const handleEditStatus = async () => {
+    // editPurchaseStatus({ purchaseId: purchase?.id, isApproved: "Approved" });
+    try {
+      await editPurchaseStatus({
+        purchaseId: purchase?.id,
+        isApproved: "Approved",
+      });
+
+      // Update the product's stock
+      await editProductStockPurchase({
+        productId: productData.id,
+        stock: productData.stock + qty,
+        totalOrder: updatedOrder,
+      });
+    } catch (error) {
+      console.error("Error updating sale status or product stock:", error);
+    }
   };
-  const handleCancelStatus = () => {
-    editPurchaseStatus({ purchaseId: purchase?.id, isApproved: "Canceled" });
+  const handleCancelStatus = async () => {
+    try {
+      // Check if the sale is already approved before canceling
+      if (isApproved === "Approved") {
+        // Update the sale status to "Canceled"
+        await editPurchaseStatus({ purchaseId: id, isApproved: "Canceled" });
+
+        // Update the product's stock and total order back to original values
+        await editProductStockPurchase({
+          productId: productData.id,
+          stock: productData.stock - qty,
+          totalOrder: productData.totalOrder - totalPrice,
+        });
+      } else {
+        // If the sale is not approved, simply update the sale status to "Canceled"
+        await editPurchaseStatus({ purchaseId: id, isApproved: "Canceled" });
+      }
+    } catch (error) {
+      console.error("Error updating purchase status or product stock:", error);
+    }
   };
   return (
     <TableRow>
       <TableCell component="th" scope="row">
-        {product}
+        {productId}
+      </TableCell>
+      <TableCell component="th" scope="row">
+        {productData?.name}
       </TableCell>
       <TableCell align="left" className="cell">
         {quantity}

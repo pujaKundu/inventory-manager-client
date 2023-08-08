@@ -69,6 +69,27 @@ export const productsApi = apiSlice.injectEndpoints({
         } catch (err) {}
       },
     }),
+    editProductStockPurchase: builder.mutation({
+      query: ({ productId, stock, totalOrder }) => ({
+        url: `/products/${productId}`,
+        method: "PATCH",
+        body: { stock, totalOrder },
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const product = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData("getProducts", undefined, (draft) => {
+              const index = draft.findIndex((t) => t.id === product?.data?.id);
+              if (index != -1) {
+                draft[index].stock = product?.data.stock;
+                draft[index].totalOrder = product?.data.totalOrder;
+              }
+            })
+          );
+        } catch (err) {}
+      },
+    }),
     deleteProduct: builder.mutation({
       query: (id) => ({
         url: `/products/${id}`,
@@ -109,5 +130,6 @@ export const {
   useGetProductByCategory,
   useEditProductMutation,
   useEditProductStockMutation,
+  useEditProductStockPurchaseMutation,
   useDeleteProductMutation,
 } = productsApi;
