@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../features/auth/authApi";
+import logo from "../../assets/logo.png";
+import "../../styles/styles.scss";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,7 +18,6 @@ const Login = () => {
       setError(responseError.data);
     }
     if (data?.accessToken && data?.user) {
-      alert("login success");
       navigate("/homepage");
     }
   }, [data]);
@@ -35,22 +34,31 @@ const Login = () => {
   };
 
   return (
-    <form method="POST" onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="enter email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        name=""
-        id=""
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-    </form>
+    <>
+      <form className="loginForm" method="POST" onSubmit={handleSubmit}>
+        <div className="logoContainer">
+          <img src={logo} alt="" />
+          <h3 className="titleLogin">Stock Optima</h3>
+        </div>
+        <input
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Enter password"
+          name=""
+          id=""
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button className="loginBtn" type="submit">
+          Login
+        </button>
+      </form>
+    </>
   );
 };
 

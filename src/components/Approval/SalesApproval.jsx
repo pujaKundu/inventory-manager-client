@@ -12,12 +12,13 @@ import {
 import Sidebar from "../Sidebar/Sidebar";
 import SalesApprovalRow from "../../components/Approval/SalesApprovalRow";
 import { useGetSalesQuery } from "../../features/sales/salesApi";
+import Loader from "../Shared/Loader";
 
 const SalesApproval = () => {
   let content = null;
   const { data: sales, isLoading, isError } = useGetSalesQuery();
 
-  if (isLoading) content = "Loading...";
+  if (isLoading) content = <Loader />;
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (sales?.length === 0) content = <p>No sales found!</p>;
   else if (sales?.length > 0) {

@@ -12,6 +12,8 @@ import { Bar } from "react-chartjs-2";
 import { useGetProductsQuery } from "../../features/products/productsApi";
 import Sidebar from "../Sidebar/Sidebar";
 import DonutChart from "./DonutChart";
+import Data from "./Data";
+import Loader from "../Shared/Loader";
 
 ChartJS.register(
   CategoryScale,
@@ -25,7 +27,7 @@ ChartJS.register(
 const Dashboard = () => {
   const { data: products } = useGetProductsQuery();
   if (!products) {
-    return <div>Loading...</div>; 
+    return <Loader />;
   }
   const productNames = products.map((product) => product?.name);
   const productSales = products.map((product) => product?.totalSales);
@@ -62,9 +64,9 @@ const Dashboard = () => {
     <>
       <Sidebar />
       <div style={{ width: "800px", height: "600px", marginLeft: "30%" }}>
+        <Data />
         <Bar data={data} options={options} />
       </div>
-      
     </>
   );
 };

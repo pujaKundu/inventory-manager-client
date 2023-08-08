@@ -14,11 +14,12 @@ import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import { useGetClientsQuery } from "../../../features/client/clientApi";
 import ClientRow from "./ClientRow";
+import Loader from "../../Shared/Loader";
 
 const ClientList = () => {
   const { data: clients, isLoading, isError } = useGetClientsQuery();
   let content = null;
-  if (isLoading) content = "Loading...";
+  if (isLoading) content = <Loader/>
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (clients?.length === 0) content = <p>No client found!</p>;
   else if (clients?.length > 0) {

@@ -16,12 +16,15 @@ import "../../../styles/styles.scss";
 import { Link } from "react-router-dom";
 import "../../../styles/styles.scss";
 import AddIcon from "@mui/icons-material/Add";
+import Loader from "../../Shared/Loader";
 
 const ProductList = () => {
   const { data: products, isLoading, isError } = useGetProductsQuery();
   let content = null;
 
-  if (isLoading) content = "Loading...";
+  
+
+  if (isLoading) content = <Loader/>
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (products?.length === 0) content = <p>No product found!</p>;
   else if (products?.length > 0) {

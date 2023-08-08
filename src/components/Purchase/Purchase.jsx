@@ -19,6 +19,7 @@ import { useGetPurchasesQuery } from "../../features/purchase/purchaseApi";
 import PurchaseRow from "./PurchaseRow";
 import "../../styles/styles.scss";
 import SelectMenu from "../Shared/SelectMenu";
+import Loader from "../Shared/Loader";
 
 const Purchase = () => {
   const [selectedFilter, setSelectedFilter] = React.useState("All");
@@ -34,7 +35,7 @@ const Purchase = () => {
     setSelectedFilter(event.target.value);
   };
 
-  if (isLoading) content = "Loading...";
+  if (isLoading) content = <Loader/>
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (purchases?.length === 0) content = <p>No purchase found!</p>;
   else if (purchases?.length > 0) {

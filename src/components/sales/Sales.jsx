@@ -19,6 +19,7 @@ import { useGetSalesQuery } from "../../features/sales/salesApi";
 import "../../styles/styles.scss";
 import SelectMenu from "../Shared/SelectMenu";
 import SalesRow from "./SalesRow";
+import Loader from "../Shared/Loader";
 
 const Sales = () => {
   const [selectedFilter, setSelectedFilter] = React.useState("All");
@@ -34,7 +35,7 @@ const Sales = () => {
     setSelectedFilter(event.target.value);
   };
 
-  if (isLoading) content = "Loading...";
+  if (isLoading) content = <Loader />;
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (sales?.length === 0) content = <p>No sales found!</p>;
   else if (sales?.length > 0) {

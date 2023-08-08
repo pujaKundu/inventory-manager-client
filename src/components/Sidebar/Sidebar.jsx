@@ -15,12 +15,18 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import Inventory2Icon from "@mui/icons-material/Inventory2";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
+import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, NavLink, Route, Routes } from "react-router-dom";
-import Configuration from "../Configuration/Configuration";
-import Purchase from "../Purchase/Purchase";
+import { Link, useNavigate } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { userLoggedOut } from "../../features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import "../../styles/styles.scss";
+import logo from "../../assets/logo.png";
 
 const drawerWidth = 240;
 
@@ -36,21 +42,21 @@ const ConfigurationComponent = () => {
 
 export default function Sidebar(props) {
   const { window } = props;
-  const [showConfiguration, setShowConfiguration] = useState(false);
-  const [showPurchase, setShowPurchase] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [showSubmenu, setShowSubmenu] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  // const toggleConfiguration = () => {
-  //   setShowConfiguration(true);
-  // };
-  // const togglePurchase = () => {
-  //   setShowPurchase(true);
-  //   setShowConfiguration(false);
-  // };
+
+  const logout = () => {
+    dispatch(userLoggedOut());
+    localStorage.clear();
+    navigate("/");
+  };
+
   const drawer = (
     <div style={{ width: "200px" }}>
       <Toolbar />
@@ -63,6 +69,7 @@ export default function Sidebar(props) {
                 color="inherit"
                 style={{ textDecoration: "none", color: "#3B185F" }}
               >
+                <DashboardIcon sx={{ marginRight: "5px" }} />
                 Dashboard
               </Button>
             </Link>
@@ -73,6 +80,7 @@ export default function Sidebar(props) {
                 color="inherit"
                 style={{ textDecoration: "none", color: "#3B185F" }}
               >
+                <SettingsApplicationsIcon sx={{ marginRight: "5px" }} />
                 Configuration
               </Button>
             </Link>
@@ -83,6 +91,7 @@ export default function Sidebar(props) {
                 color="inherit"
                 style={{ textDecoration: "none", color: "#3B185F" }}
               >
+                <ShoppingCartIcon sx={{ marginRight: "5px" }} />
                 Purchase
               </Button>
             </Link>
@@ -93,6 +102,7 @@ export default function Sidebar(props) {
                 color="inherit"
                 style={{ textDecoration: "none", color: "#3B185F" }}
               >
+                <LoyaltyIcon sx={{ marginRight: "5px" }} />
                 Sales
               </Button>
             </Link>
@@ -103,9 +113,23 @@ export default function Sidebar(props) {
                 color="inherit"
                 style={{ textDecoration: "none", color: "#3B185F" }}
               >
+                <LibraryAddCheckIcon sx={{ marginRight: "5px" }} />
                 Approval
               </Button>
             </Link>
+          </ListItem>
+          <ListItem>
+            <Button
+              onClick={logout}
+              style={{
+                backgroundColor: "#d65046",
+                color: "#fff",
+                marginTop: "32vh",
+              }}
+            >
+              <LogoutIcon />
+              Logout
+            </Button>
           </ListItem>
         </List>
       </List>
@@ -119,7 +143,7 @@ export default function Sidebar(props) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
-        style={{ backgroundColor: "#2A0944" }}
+        style={{ backgroundColor: "#0c55c9" }}
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -136,8 +160,18 @@ export default function Sidebar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Dashboard
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <img
+              src={logo}
+              style={{ width: "28px", height: "28px", marginRight: "5px" }}
+              alt=""
+            />
+            Stock Optima
           </Typography>
         </Toolbar>
       </AppBar>

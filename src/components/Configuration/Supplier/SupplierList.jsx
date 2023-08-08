@@ -14,11 +14,12 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
+import Loader from "../../Shared/Loader";
 
 const SupplierList = () => {
   const { data: suppliers, isLoading, isError } = useGetSuppliersQuery();
   let content = null;
-  if (isLoading) content = "Loading...";
+  if (isLoading) content = <Loader/>
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (suppliers?.length === 0) content = <p>No supplier found!</p>;
   else if (suppliers?.length > 0) {

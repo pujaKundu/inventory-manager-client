@@ -10,15 +10,14 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import AddIcon from "@mui/icons-material/Add";
 import Sidebar from "../Sidebar/Sidebar";
 import { useGetPurchasesQuery } from "../../features/purchase/purchaseApi";
+import Loader from "../Shared/Loader";
 
 const Approval = () => {
   let content = null;
   const { data: purchases, isLoading, isError } = useGetPurchasesQuery();
-  if (isLoading) content = "Loading...";
+  if (isLoading) content = <Loader/>
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (purchases?.length === 0) content = <p>No purchase found!</p>;
   else if (purchases?.length > 0) {
