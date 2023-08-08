@@ -25,23 +25,15 @@ const SalesApprovalRow = ({ sale }) => {
 
   const [editSaleStatus, { isSuccess }] = useEditSaleStatusMutation();
   //for product stock update
-  console.log(`productId ${productId}`);
+
   const { data: productData } = useGetProductQuery(productId);
   const [editProductStock] = useEditProductStockMutation();
 
   const qty = parseInt(quantity);
-  console.log(productData);
-  console.log(`order korsi koyta `, qty);
-  console.log(`order dam `, totalPrice);
-  console.log(`stock e ache koyta `, productData?.stock);
-  console.log(`stock e sales`, productData?.totalSales);
-  console.log(`total sales howar kotha `, productData?.totalSales + totalPrice);
-  console.log(`qty howar kotha `, productData?.stock - qty);
 
   const updatedSales = productData?.totalSales + totalPrice;
-  console.log(updatedSales);
+
   const handleEditStatus = async () => {
-    // editSaleStatus({ saleId: sale?.id, isApproved: "Approved" });
     try {
       // Check if the product has enough stock
       if (productData && productData.stock >= qty) {
@@ -55,24 +47,40 @@ const SalesApprovalRow = ({ sale }) => {
           totalSales: updatedSales,
         });
       } else {
-        // Handle insufficient stock scenario here (e.g., show an error message)
-        console.log(
-          "Insufficient stock for the product:",
-          productId,
-          productData.stock
-        );
+        alert("Insufficient stock for the product:");
       }
     } catch (error) {
       console.error("Error updating sale status or product stock:", error);
     }
   };
-  const handleCancelStatus = () => {
-    editSaleStatus({ saleId: sale?.id, isApproved: "Canceled" });
+  const handleCancelStatus = async () => {
+    try {
+      // Check if the sale is already approved before canceling
+      if (isApproved === "Approved") {
+        // Update the sale status to "Canceled"
+        await editSaleStatus({ saleId: id, isApproved: "Canceled" });
+
+        // Update the product's stock and totalSales back to original values
+        await editProductStock({
+          productId: productData.id,
+          stock: productData.stock + qty,
+          totalSales: productData.totalSales - totalPrice,
+        });
+      } else {
+        // If the sale is not approved, simply update the sale status to "Canceled"
+        await editSaleStatus({ saleId: id, isApproved: "Canceled" });
+      }
+    } catch (error) {
+      console.error("Error updating sale status or product stock:", error);
+    }
   };
   return (
     <TableRow>
       <TableCell component="th" scope="row">
         {productId}
+      </TableCell>
+      <TableCell component="th" scope="row">
+        {productData?.name}
       </TableCell>
       <TableCell align="left" className="cell">
         {quantity}
