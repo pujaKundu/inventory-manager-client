@@ -25,14 +25,21 @@ const SalesApprovalRow = ({ sale }) => {
 
   const [editSaleStatus, { isSuccess }] = useEditSaleStatusMutation();
   //for product stock update
-  console.log(`productId ${productId}`)
+  console.log(`productId ${productId}`);
   const { data: productData } = useGetProductQuery(productId);
   const [editProductStock] = useEditProductStockMutation();
 
   const qty = parseInt(quantity);
-  console.log(productData)
+  console.log(productData);
   console.log(`order korsi koyta `, qty);
+  console.log(`order dam `, totalPrice);
   console.log(`stock e ache koyta `, productData?.stock);
+  console.log(`stock e sales`, productData?.totalSales);
+  console.log(`total sales howar kotha `, productData?.totalSales + totalPrice);
+  console.log(`qty howar kotha `, productData?.stock - qty);
+
+  const updatedSales = productData?.totalSales + totalPrice;
+  console.log(updatedSales);
   const handleEditStatus = async () => {
     // editSaleStatus({ saleId: sale?.id, isApproved: "Approved" });
     try {
@@ -45,6 +52,7 @@ const SalesApprovalRow = ({ sale }) => {
         await editProductStock({
           productId: productData.id,
           stock: productData.stock - qty,
+          totalSales: updatedSales,
         });
       } else {
         // Handle insufficient stock scenario here (e.g., show an error message)

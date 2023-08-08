@@ -58,10 +58,11 @@ export const productsApi = apiSlice.injectEndpoints({
         try {
           const product = await queryFulfilled;
           dispatch(
-            apiSlice.util.updateQueryData("getSales", undefined, (draft) => {
+            apiSlice.util.updateQueryData("getProducts", undefined, (draft) => {
               const index = draft.findIndex((t) => t.id === product?.data?.id);
               if (index != -1) {
-                draft[index].stock = sale?.data.stock;
+                draft[index].stock = product?.data.stock;
+                draft[index].totalSales = product?.data.totalSales;
               }
             })
           );
