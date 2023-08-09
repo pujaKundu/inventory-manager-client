@@ -6,7 +6,7 @@ import "../../styles/styles.scss";
 const PurchaseRow = ({ purchase }) => {
   const {
     id,
-    product,
+    productId,
     quantity,
     sellingPrice,
     vat,
@@ -26,7 +26,7 @@ const PurchaseRow = ({ purchase }) => {
       }
     >
       <TableCell component="th" scope="row">
-        {product}
+        {productId}
       </TableCell>
       <TableCell align="left" className="cell">
         {quantity}

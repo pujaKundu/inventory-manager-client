@@ -22,7 +22,7 @@ const Approval = () => {
   else if (purchases?.length === 0) content = <p>No purchase found!</p>;
   else if (purchases?.length > 0) {
     content = (
-      <TableContainer component={Paper} sx={{ width: "75vw" }}>
+      <TableContainer component={Paper} sx={{ width: "78vw" }}>
         <h3>Approve Purchase</h3>
 
         <Table>

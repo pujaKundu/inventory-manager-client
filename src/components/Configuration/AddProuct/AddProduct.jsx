@@ -5,15 +5,16 @@ import { useGetCategoriesQuery } from "../../../features/categories/catergoriesA
 import { useAddProductMutation } from "../../../features/products/productsApi";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/styles.scss";
+import Loader from "../../Shared/Loader";
 
 const AddProduct = () => {
   const navigate = useNavigate();
-  const { data: categories } = useGetCategoriesQuery();
+  const { data: categories, isLoading, isError } = useGetCategoriesQuery();
 
   const [addProduct, { isSuccess }] = useAddProductMutation();
 
   if (!categories) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   //states for input values
   const [name, setName] = useState("");
@@ -44,8 +45,18 @@ const AddProduct = () => {
     alert("Product added successfully");
     navigate("/products");
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (isError) {
+    // Handle error case
+    return <div>Error loading categories</div>;
+  }
+
   return (
-    <div>
+    <div style={{ marginLeft: "15%" }}>
       <Sidebar />
       <h2>Add new product</h2>
       <form action="" method="post" onSubmit={handleSubmit}>

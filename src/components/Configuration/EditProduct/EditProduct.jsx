@@ -8,6 +8,7 @@ import {
   useEditProductMutation,
   useGetProductQuery,
 } from "../../../features/products/productsApi";
+import Loader from "../../Shared/Loader";
 
 const EditProduct = () => {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ const EditProduct = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   return (

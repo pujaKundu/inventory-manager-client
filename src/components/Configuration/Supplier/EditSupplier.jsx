@@ -6,6 +6,7 @@ import {
 } from "../../../features/suppliers/suppliersApi";
 import Sidebar from "../../Sidebar/Sidebar";
 import { Button, TextField } from "@mui/material";
+import Loader from "../../Shared/Loader";
 
 const EditSupplier = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const EditSupplier = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
   return (
     <div>

@@ -8,6 +8,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import { useGetProductsQuery } from "../../features/products/productsApi";
 import ShowConfirmedData from "../Shared/ShowConfirmedData";
 import { calculateTotalPrice } from "../../../utils/calculateVat";
+import Loader from "../Shared/Loader";
 
 const offices = [{ id: 1, name: "MGM" }];
 
@@ -44,7 +45,7 @@ const CreatePurchase = () => {
   }
 
   if (!categories || !suppliers || !products) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
   const handleSubmit = (e) => {
     e.preventDefault();

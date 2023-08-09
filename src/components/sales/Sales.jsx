@@ -40,13 +40,13 @@ const Sales = () => {
   else if (sales?.length === 0) content = <p>No sales found!</p>;
   else if (sales?.length > 0) {
     content = (
-      <TableContainer component={Paper} sx={{ width: "75vw" }}>
+      <TableContainer component={Paper} sx={{ width: "78vw" }}>
         <h3>Sales</h3>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell align="left" className="th title">
-                Product name
+                Product id
               </TableCell>
               <TableCell align="left" className="th title">
                 Quantity

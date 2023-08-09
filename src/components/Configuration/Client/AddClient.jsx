@@ -1,5 +1,5 @@
-import { Button, MenuItem, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Button, TextField } from "@mui/material";
+import React, {  useState } from "react";
 import Sidebar from "../../Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useAddClientMutation } from "../../../features/client/clientApi";
@@ -29,15 +29,13 @@ const AddClient = () => {
     // Validate email
     if (!emailPattern.test(email)) {
       setError("Invalid email address.");
-      console.log(error);
     }
 
     // Validate phone number
     if (!phonePattern.test(phone)) {
       setError("Invalid phone number.");
-      console.log(error);
     }
-    
+
     const formData = {
       clientName,
       contactName,

@@ -35,7 +35,7 @@ const Purchase = () => {
     setSelectedFilter(event.target.value);
   };
 
-  if (isLoading) content = <Loader/>
+  if (isLoading) content = <Loader />;
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (purchases?.length === 0) content = <p>No purchase found!</p>;
   else if (purchases?.length > 0) {
@@ -46,7 +46,7 @@ const Purchase = () => {
           <TableHead>
             <TableRow>
               <TableCell align="left" className="th title">
-                Product name
+                Product id
               </TableCell>
               <TableCell align="left" className="th title">
                 Quantity

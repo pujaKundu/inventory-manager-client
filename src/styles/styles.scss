@@ -1,5 +1,5 @@
 .title {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 .input-container {
   margin: 20px;
@@ -68,14 +68,14 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #ebe8e8;
+  background-color: #fcf9f9;
 }
 .loginForm > input {
   border-top: none;
   border-left: none;
   border-right: none;
   border-bottom: 1px solid slategray;
-  width: 250px;
+  width: 300px;
   padding: 15px;
   margin-bottom: 10px;
   background-color: #f7f7f7;

@@ -1,7 +1,7 @@
 import React from "react";
 
 const SelectMenu = ({ selectedFilter, handleFilterChange }) => {
-  console.log(selectedFilter);
+  
   return (
     <div style={{ marginTop: "1rem" }}>
       <select

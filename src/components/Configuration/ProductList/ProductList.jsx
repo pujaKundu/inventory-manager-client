@@ -12,7 +12,6 @@ import {
   TableRow,
 } from "@mui/material";
 import Sidebar from "../../Sidebar/Sidebar";
-import "../../../styles/styles.scss";
 import { Link } from "react-router-dom";
 import "../../../styles/styles.scss";
 import AddIcon from "@mui/icons-material/Add";
@@ -22,9 +21,7 @@ const ProductList = () => {
   const { data: products, isLoading, isError } = useGetProductsQuery();
   let content = null;
 
-  
-
-  if (isLoading) content = <Loader/>
+  if (isLoading) content = <Loader />;
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (products?.length === 0) content = <p>No product found!</p>;
   else if (products?.length > 0) {
@@ -43,23 +40,23 @@ const ProductList = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className="th">ID</TableCell>
-              <TableCell align="left" className="th">
+              <TableCell className="th title">ID</TableCell>
+              <TableCell align="left" className="th title">
                 Product name
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Category
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Unit price
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Total sales
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 In stock
               </TableCell>
-              <TableCell align="left" className="th">
+              <TableCell align="left" className="th title">
                 Total order
               </TableCell>
             </TableRow>
@@ -75,7 +72,7 @@ const ProductList = () => {
   }
 
   return (
-    <div style={{ height: 400, width: "60%", marginLeft: "20%"}}>
+    <div style={{ height: 400, width: "60%", marginLeft: "20%" }}>
       <Sidebar />
       {content}
     </div>

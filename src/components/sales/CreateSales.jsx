@@ -8,6 +8,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import { useGetProductsQuery } from "../../features/products/productsApi";
 import { calculateTotalPrice } from "../../../utils/calculateVat";
 import ShowConfirmedData from "../Shared/ShowConfirmedData";
+import Loader from "../Shared/Loader";
 
 const offices = [{ id: 1, name: "MGM" }];
 
@@ -44,10 +45,9 @@ const CreateSales = () => {
   }
 
   if (!categories || !clients || !products) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
-  console.log("product id in create sales", productId);
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {

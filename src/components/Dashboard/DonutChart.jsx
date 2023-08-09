@@ -2,13 +2,14 @@ import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { useGetProductsQuery } from "../../features/products/productsApi";
+import Loader from "../Shared/Loader";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DonutChart = () => {
   const { data: products } = useGetProductsQuery();
   if (!products) {
-    return <div>Loading...</div>; // or any other loading indicator
+    return <Loader />;
   }
   const productNames = products.map((product) => product?.name);
   const productSales = products.map((product) => product?.totalSales);
@@ -38,7 +39,6 @@ const DonutChart = () => {
         ],
         borderWidth: 1,
       },
-     
     ],
   };
   return (

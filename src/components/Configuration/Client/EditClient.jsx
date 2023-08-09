@@ -7,6 +7,7 @@ import {
   useEditClientMutation,
   useGetClientQuery,
 } from "../../../features/client/clientApi";
+import Loader from "../../Shared/Loader";
 
 const EditClient = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const EditClient = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
   return (
     <div>
