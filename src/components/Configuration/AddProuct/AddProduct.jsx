@@ -6,12 +6,19 @@ import { useAddProductMutation } from "../../../features/products/productsApi";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/styles.scss";
 import Loader from "../../Shared/Loader";
+import Alert from "@mui/material/Alert";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const AddProduct = () => {
   const navigate = useNavigate();
+
+  const [showError, setShowError] = useState(false);
   const { data: categories, isLoading, isError } = useGetCategoriesQuery();
 
-  const [addProduct, { isSuccess }] = useAddProductMutation();
+  const [
+    addProduct,
+    { isSuccess, isLoading: addProductLoading, isError: addProductError },
+  ] = useAddProductMutation();
 
   if (!categories) {
     return <Loader />;
@@ -42,8 +49,11 @@ const AddProduct = () => {
     setTotalSales(0);
     setCategory("");
 
-    alert("Product added successfully");
-    navigate("/products");
+    if (!addProductLoading && !addProductError) {
+      alert("Product added successfully");
+
+      navigate("/products");
+    }
   };
 
   if (isLoading) {
@@ -58,7 +68,9 @@ const AddProduct = () => {
   return (
     <div style={{ marginLeft: "15%" }}>
       <Sidebar />
+
       <h2>Add new product</h2>
+
       <form action="" method="post" onSubmit={handleSubmit}>
         <div className="input-container">
           <TextField
@@ -130,7 +142,7 @@ const AddProduct = () => {
         </div>
         <Button sx={{ mt: 3 }} variant="contained" type="submit">
           Save
-        </Button>
+        </Button>{" "}
       </form>
     </div>
   );

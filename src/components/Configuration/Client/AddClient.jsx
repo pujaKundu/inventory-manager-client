@@ -54,7 +54,7 @@ const AddClient = () => {
     navigate("/clients");
   };
   return (
-    <div>
+    <div style={{ marginLeft: "15%" }}>
       <Sidebar />
       <h2>Add new client</h2>
       <form action="" method="post" onSubmit={handleSubmit}>

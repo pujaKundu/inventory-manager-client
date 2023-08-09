@@ -10,7 +10,10 @@ import { calculateTotalPrice } from "../../../utils/calculateVat";
 import ShowConfirmedData from "../Shared/ShowConfirmedData";
 import Loader from "../Shared/Loader";
 
-const offices = [{ id: 1, name: "MGM" }];
+const offices = [
+  { id: 1, name: "Dhaka" },
+  { id: 2, name: "Rajshahi" },
+];
 
 const CreateSales = () => {
   const navigate = useNavigate();
@@ -101,7 +104,6 @@ const CreateSales = () => {
             }}
             value={formattedDate}
             required
-            disabled
           />
           <label>Receive date</label>
           <TextField

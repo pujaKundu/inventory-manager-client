@@ -45,7 +45,7 @@ const AddSupplier = () => {
     navigate("/suppliers");
   };
   return (
-    <div>
+    <div style={{ marginLeft: "15%" }}>
       <Sidebar />
       <h2>Add new supplier</h2>
       <form action="" method="post" onSubmit={handleSubmit}>

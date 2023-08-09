@@ -17,6 +17,7 @@ import "../../../styles/styles.scss";
 import AddIcon from "@mui/icons-material/Add";
 import Loader from "../../Shared/Loader";
 
+
 const ProductList = () => {
   const { data: products, isLoading, isError } = useGetProductsQuery();
   let content = null;

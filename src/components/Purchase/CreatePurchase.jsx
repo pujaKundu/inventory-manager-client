@@ -10,7 +10,10 @@ import ShowConfirmedData from "../Shared/ShowConfirmedData";
 import { calculateTotalPrice } from "../../../utils/calculateVat";
 import Loader from "../Shared/Loader";
 
-const offices = [{ id: 1, name: "MGM" }];
+const offices = [
+  { id: 1, name: "Dhaka" },
+  { id: 2, name: "Rajshahi" },
+];
 
 const CreatePurchase = () => {
   const navigate = useNavigate();
@@ -45,7 +48,7 @@ const CreatePurchase = () => {
   }
 
   if (!categories || !suppliers || !products) {
-    return <Loader/>;
+    return <Loader />;
   }
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -100,7 +103,6 @@ const CreatePurchase = () => {
             }}
             value={formattedDate}
             required
-            disabled
           />
           <label>Receive date</label>
           <TextField
