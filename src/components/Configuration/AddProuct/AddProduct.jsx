@@ -12,7 +12,6 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 const AddProduct = () => {
   const navigate = useNavigate();
 
-  const [showError, setShowError] = useState(false);
   const { data: categories, isLoading, isError } = useGetCategoriesQuery();
 
   const [
@@ -49,11 +48,9 @@ const AddProduct = () => {
     setTotalSales(0);
     setCategory("");
 
-    if (!addProductLoading && !addProductError) {
-      alert("Product added successfully");
+    alert("Product added successfully");
 
-      navigate("/products");
-    }
+    navigate("/products");
   };
 
   if (isLoading) {
