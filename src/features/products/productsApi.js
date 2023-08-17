@@ -28,6 +28,7 @@ export const productsApi = apiSlice.injectEndpoints({
         } catch (err) {}
       },
     }),
+
     editProduct: builder.mutation({
       query: ({ productId, data }) => ({
         url: `/products/${productId}`,
@@ -39,7 +40,9 @@ export const productsApi = apiSlice.injectEndpoints({
           const product = await queryFulfilled;
           dispatch(
             apiSlice.util.updateQueryData("getProducts", undefined, (draft) => {
-              const index = draft.findIndex((t) => t.id === product?.data?.id);
+              const index = draft.findIndex(
+                (t) => t._id === product?.data?._id
+              );
               if (index != -1) {
                 draft[index] = product?.data;
               }
@@ -59,7 +62,9 @@ export const productsApi = apiSlice.injectEndpoints({
           const product = await queryFulfilled;
           dispatch(
             apiSlice.util.updateQueryData("getProducts", undefined, (draft) => {
-              const index = draft.findIndex((t) => t.id === product?.data?.id);
+              const index = draft.findIndex(
+                (t) => t._id === product?.data?._id
+              );
               if (index != -1) {
                 draft[index].stock = product?.data.stock;
                 draft[index].totalSales = product?.data.totalSales;
@@ -80,7 +85,9 @@ export const productsApi = apiSlice.injectEndpoints({
           const product = await queryFulfilled;
           dispatch(
             apiSlice.util.updateQueryData("getProducts", undefined, (draft) => {
-              const index = draft.findIndex((t) => t.id === product?.data?.id);
+              const index = draft.findIndex(
+                (t) => t._id === product?.data?._id
+              );
               if (index != -1) {
                 draft[index].stock = product?.data.stock;
                 draft[index].totalOrder = product?.data.totalOrder;
@@ -91,8 +98,8 @@ export const productsApi = apiSlice.injectEndpoints({
       },
     }),
     deleteProduct: builder.mutation({
-      query: (id) => ({
-        url: `/products/${id}`,
+      query: (_id) => ({
+        url: `/products/${_id}`,
         method: "DELETE",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -100,7 +107,7 @@ export const productsApi = apiSlice.injectEndpoints({
         try {
           dispatch(
             apiSlice.util.updateQueryData("getProducts", undefined, (draft) => {
-              const index = draft.findIndex((t) => t?.id === productId);
+              const index = draft.findIndex((t) => t?._id === productId);
               if (index !== -1) {
                 draft.splice(index, 1);
               }
@@ -114,7 +121,7 @@ export const productsApi = apiSlice.injectEndpoints({
         const productId = arg;
         dispatch(
           apiSlice.util.updateQueryData("getProducts", undefined, (draft) => {
-            const product = { id: productId };
+            const product = { _id: productId };
             draft.push(product);
           })
         );

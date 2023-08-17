@@ -49,6 +49,9 @@ const Sales = () => {
                 Product id
               </TableCell>
               <TableCell align="left" className="th title">
+                Category
+              </TableCell>
+              <TableCell align="left" className="th title">
                 Quantity
               </TableCell>
               <TableCell align="left" className="th title">
@@ -78,7 +81,7 @@ const Sales = () => {
               </TableRow>
             ) : (
               filteredSales.map((sale) => (
-                <SalesRow key={sale.id} sale={sale} />
+                <SalesRow key={sale._id} sale={sale} />
               ))
             )}
           </TableBody>

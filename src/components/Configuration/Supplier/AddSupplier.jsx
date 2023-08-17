@@ -18,6 +18,8 @@ const AddSupplier = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [error, setError] = useState("");
 
+  const id = Math.random();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsFormSubmitted(true); // Set the form submission flag to true
@@ -33,6 +35,7 @@ const AddSupplier = () => {
       email,
       phone,
       address,
+      id
     };
     addSupplier(formData);
     setSupplierName("");

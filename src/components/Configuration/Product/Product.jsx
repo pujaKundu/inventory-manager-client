@@ -8,19 +8,17 @@ import { Link } from "react-router-dom";
 import "../../../styles/styles.scss";
 
 const Product = ({ product }) => {
-  const { id, name, price, totalSales, stock, totalOrder, category } =
+  const { _id, name, price, totalSales, stock, totalOrder, category } =
     product || {};
   const [deleteProduct] = useDeleteProductMutation();
   const handleDelete = (e) => {
     e.preventDefault();
-    deleteProduct(id);
+    deleteProduct(_id);
   };
   return (
     <>
       <TableRow>
-        <TableCell component="th" scope="row">
-          {id}
-        </TableCell>
+        
         <TableCell align="left" className="cell">
           {name}
         </TableCell>
@@ -39,7 +37,7 @@ const Product = ({ product }) => {
         <TableCell align="left" className="cell">
           {totalOrder}
         </TableCell>
-        <Link to={`/editProduct/${id}`}>
+        <Link to={`/editProduct/${_id}`}>
           <TableCell align="left" className="cell">
             <EditIcon className="icon" />
           </TableCell>

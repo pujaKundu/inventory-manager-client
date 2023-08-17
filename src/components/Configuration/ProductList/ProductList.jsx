@@ -17,11 +17,10 @@ import "../../../styles/styles.scss";
 import AddIcon from "@mui/icons-material/Add";
 import Loader from "../../Shared/Loader";
 
-
 const ProductList = () => {
   const { data: products, isLoading, isError } = useGetProductsQuery();
   let content = null;
-
+ 
   if (isLoading) content = <Loader />;
   else if (isError) content = <p className="">There was an error occurred</p>;
   else if (products?.length === 0) content = <p>No product found!</p>;
@@ -29,19 +28,11 @@ const ProductList = () => {
     content = (
       <TableContainer component={Paper} sx={{ width: "75vw" }}>
         <h3>Products</h3>
-        <Link to="/addProduct">
-          <Button
-            variant="contained"
-            sx={{ position: "absolute", marginLeft: "25%", marginTop: "1%" }}
-          >
-            <AddIcon />
-            Add Product
-          </Button>
-        </Link>
+
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className="th title">ID</TableCell>
+              
               <TableCell align="left" className="th title">
                 Product name
               </TableCell>
@@ -64,7 +55,7 @@ const ProductList = () => {
           </TableHead>
           <TableBody>
             {products.map((product) => (
-              <Product key={product.id} product={product} />
+              <Product key={product._id} product={product} />
             ))}
           </TableBody>
         </Table>
@@ -75,6 +66,15 @@ const ProductList = () => {
   return (
     <div style={{ height: 400, width: "60%", marginLeft: "20%" }}>
       <Sidebar />
+      <Link to="/addProduct">
+        <Button
+          variant="contained"
+          sx={{ position: "absolute", marginLeft: "25%", marginTop: "1%" }}
+        >
+          <AddIcon />
+          Add Product
+        </Button>
+      </Link>
       {content}
     </div>
   );

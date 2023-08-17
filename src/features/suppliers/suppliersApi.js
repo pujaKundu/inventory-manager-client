@@ -32,7 +32,7 @@ export const suppliersApi = apiSlice.injectEndpoints({
     editSupplier: builder.mutation({
       query: ({ supplierId, data }) => ({
         url: `/suppliers/${supplierId}`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -44,7 +44,7 @@ export const suppliersApi = apiSlice.injectEndpoints({
               undefined,
               (draft) => {
                 const index = draft.findIndex(
-                  (t) => t.id === supplier?.data?.id
+                  (t) => t._id === supplier?.data?._id
                 );
                 if (index != -1) {
                   draft[index] = supplier?.data;
@@ -56,8 +56,8 @@ export const suppliersApi = apiSlice.injectEndpoints({
       },
     }),
     deleteSupplier: builder.mutation({
-      query: (id) => ({
-        url: `/suppliers/${id}`,
+      query: (_id) => ({
+        url: `/suppliers/${_id}`,
         method: "DELETE",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -68,7 +68,7 @@ export const suppliersApi = apiSlice.injectEndpoints({
               "getSuppliers",
               undefined,
               (draft) => {
-                const index = draft.findIndex((t) => t?.id === supplierId);
+                const index = draft.findIndex((t) => t?._id === supplierId);
                 if (index !== -1) {
                   draft.splice(index, 1);
                 }
@@ -83,7 +83,7 @@ export const suppliersApi = apiSlice.injectEndpoints({
         const supplierId = arg;
         dispatch(
           apiSlice.util.updateQueryData("getSuppliers", undefined, (draft) => {
-            const supplier = { id: supplierId };
+            const supplier = { _id: supplierId };
             draft.push(supplier);
           })
         );

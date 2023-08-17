@@ -1,5 +1,5 @@
 import { Alert, Button, MenuItem, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetCategoriesQuery } from "../../features/categories/catergoriesApi";
 import { useGetClientsQuery } from "../../features/client/clientApi";
@@ -9,6 +9,7 @@ import { useGetProductsQuery } from "../../features/products/productsApi";
 import { calculateTotalPrice } from "../../../utils/calculateVat";
 import ShowConfirmedData from "../Shared/ShowConfirmedData";
 import Loader from "../Shared/Loader";
+import { v4 as uuidv4 } from "uuid";
 
 const offices = [
   { id: 1, name: "Dhaka" },
@@ -33,17 +34,19 @@ const CreateSales = () => {
   const [shippingAddress, setShippingAddress] = useState("");
   const [category, setCategory] = useState("");
   const [productId, setProductId] = useState("");
+
   const [client, setClient] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [sellingPrice, setSellingPrice] = useState(0);
   const [vat, setVat] = useState(0);
   const [message, setMessage] = useState("");
 
-  const isApproved = false;
+  const isApproved = "Pending";
+  
 
   const totalPrice = calculateTotalPrice(quantity, sellingPrice, vat);
 
-  if (sellingPrice < 0 || quantity < 0) {
+  if (sellingPrice < 0 || quantity < 0 || vat < 0) {
     alert("Please enter non-negative value");
   }
 
@@ -51,8 +54,11 @@ const CreateSales = () => {
     return <Loader />;
   }
 
+  const id = Math.random();
   const handleSubmit = (e) => {
     e.preventDefault();
+    //generate unique id
+    const id = uuidv4();
     const formData = {
       createDate: formattedDate,
       office,
@@ -60,13 +66,15 @@ const CreateSales = () => {
       shippingAddress,
       category,
       productId,
-      quantity,
+      quantity: parseInt(quantity),
       client,
-      sellingPrice,
-      vat,
+      sellingPrice: parseFloat(sellingPrice),
+      vat: parseInt(vat),
       isApproved,
-      totalPrice,
+      totalPrice: parseFloat(totalPrice),
+      id,
     };
+
     addSale(formData);
     setCreateDate("");
     setOffice("");
@@ -76,7 +84,6 @@ const CreateSales = () => {
     setClient("");
     setProductId("");
     setQuantity(0);
-
     setSellingPrice(0);
     setVat(0);
 
@@ -84,6 +91,7 @@ const CreateSales = () => {
     alert("Sales order created");
     navigate("/sales");
   };
+
   return (
     <div>
       <Sidebar />
@@ -129,7 +137,7 @@ const CreateSales = () => {
             onChange={(e) => setProductId(e.target.value)}
           >
             {products.map((option) => (
-              <MenuItem key={option.id} value={option.id}>
+              <MenuItem key={option._id} value={option._id}>
                 {option.name}
               </MenuItem>
             ))}
@@ -144,7 +152,7 @@ const CreateSales = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             {categories.map((option) => (
-              <MenuItem key={option.id} value={option.name}>
+              <MenuItem key={option._id} value={option.name}>
                 {option.name}
               </MenuItem>
             ))}
@@ -218,7 +226,7 @@ const CreateSales = () => {
             onChange={(e) => setClient(e.target.value)}
           >
             {clients.map((option) => (
-              <MenuItem key={option.id} value={option.clientName}>
+              <MenuItem key={option._id} value={option.clientName}>
                 {option.clientName}
               </MenuItem>
             ))}

@@ -13,14 +13,20 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  console.log(data);
+
   useEffect(() => {
+   
     if (responseError?.data) {
       setError(responseError.data);
     }
-    if (data?.accessToken && data?.user) {
+    if ( data) {
+      // Data is available after successful login
+     
       navigate("/homepage");
     }
-  }, [data]);
+    
+  }, [data, responseError, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,9 +60,10 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="loginBtn" type="submit">
-          Login
+        <button className="loginBtn" type="submit" disabled={isLoading}>
+          {isLoading ? "Logging in..." : "Login"}
         </button>
+        {error && <div className="error">{error}</div>}
       </form>
     </>
   );

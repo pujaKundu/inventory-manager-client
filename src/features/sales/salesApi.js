@@ -47,7 +47,7 @@ export const salesApi = apiSlice.injectEndpoints({
     }),
     editSaleStatus: builder.mutation({
       query: ({ saleId, isApproved }) => ({
-        url: `/orders/${saleId}`,
+        url: `/orders/${saleId}/status`,
         method: "PATCH",
         body: { isApproved },
       }),
@@ -56,7 +56,7 @@ export const salesApi = apiSlice.injectEndpoints({
           const sale = await queryFulfilled;
           dispatch(
             apiSlice.util.updateQueryData("getSales", undefined, (draft) => {
-              const index = draft.findIndex((t) => t.id === sale?.data?.id);
+              const index = draft.findIndex((t) => t._id === sale?.data?._id);
               if (index != -1) {
                 draft[index].isApproved = sale?.data.isApproved;
               }

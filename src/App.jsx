@@ -24,6 +24,7 @@ import {
   Sales,
   CreateSales,
 } from "./components/index";
+import Register from "./components/Register";
 
 function App({ children }) {
   return (
@@ -35,6 +36,7 @@ function App({ children }) {
         <Router>
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/homepage" element={<Homepage />} />
             <Route path="/configuration" element={<Configuration />} />

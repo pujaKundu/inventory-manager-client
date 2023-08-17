@@ -30,21 +30,21 @@ const EditSupplier = () => {
       contactName,
       email,
       phone,
-      address
+      address,
     };
-    editSupplier({ supplierId: supplier?.id, data: formData });
+    editSupplier({ supplierId: supplier?._id, data: formData });
     setSupplierName("");
     setContactName("");
     setEmail("");
     setPhone("");
     setAddress("");
 
-    alert("Supplier edited successfully");
+    // alert("Supplier edited successfully");
     navigate("/suppliers");
   };
 
   if (loading) {
-    return <Loader/>;
+    return <Loader />;
   }
   return (
     <div>
@@ -103,7 +103,6 @@ const EditSupplier = () => {
             required
             onChange={(e) => setAddress(e.target.value)}
           />
-         
         </div>
         <Button sx={{ mt: 3 }} variant="contained" type="submit">
           Save

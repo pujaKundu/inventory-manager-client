@@ -6,12 +6,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
 const SupplierRow = ({ supplier }) => {
-  const { id, supplierName, contactName, email, phone, address } =
+  const { _id, supplierName, contactName, email, phone, address } =
     supplier || {};
   const [deleteSupplier] = useDeleteSupplierMutation();
   const handleDelete = (e) => {
     e.preventDefault();
-    deleteSupplier(id);
+    deleteSupplier(_id);
   };
   return (
     <TableRow>
@@ -30,7 +30,7 @@ const SupplierRow = ({ supplier }) => {
       <TableCell align="left" className="cell">
         {address}
       </TableCell>
-      <Link to={`/editSupplier/${id}`}>
+      <Link to={`/editSupplier/${_id}`}>
         <TableCell align="left" className="cell">
           <EditIcon />
         </TableCell>

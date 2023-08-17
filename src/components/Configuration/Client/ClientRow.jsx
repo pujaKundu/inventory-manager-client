@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 import { useDeleteClientMutation } from "../../../features/client/clientApi";
 
 const ClientRow = ({ client }) => {
-  const { id, clientName, contactName, email, phone, address } = client || {};
+  const { _id, clientName, contactName, email, phone, address } = client || {};
   const [deleteClient] = useDeleteClientMutation();
   const handleDelete = (e) => {
     e.preventDefault();
-    deleteClient(id);
+    deleteClient(_id);
   };
   return (
     <TableRow>
@@ -29,7 +29,7 @@ const ClientRow = ({ client }) => {
       <TableCell align="left" className="cell">
         {address}
       </TableCell>
-      <Link to={`/editClient/${id}`}>
+      <Link to={`/editClient/${_id}`}>
         <TableCell align="left" className="cell">
           <EditIcon />
         </TableCell>

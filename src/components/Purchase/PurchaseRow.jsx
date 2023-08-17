@@ -5,8 +5,9 @@ import "../../styles/styles.scss";
 
 const PurchaseRow = ({ purchase }) => {
   const {
-    id,
+    
     productId,
+    category,
     quantity,
     sellingPrice,
     vat,
@@ -25,8 +26,11 @@ const PurchaseRow = ({ purchase }) => {
           : ""
       }
     >
-      <TableCell component="th" scope="row">
+      <TableCell align="left" className="cell">
         {productId}
+      </TableCell>
+      <TableCell align="left" className="cell">
+        {category}
       </TableCell>
       <TableCell align="left" className="cell">
         {quantity}

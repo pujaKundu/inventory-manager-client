@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 const ShowPurchase = ({
-  product,
+  productId,
   category,
   quantity,
   priceOfSingleItem,
@@ -18,6 +18,7 @@ const ShowPurchase = ({
   totalPrice,
   createDate,
 }) => {
+  let showId=productId.slice(0,5)
   return (
     <TableContainer component={Paper} sx={{ width: "75vw", marginLeft: "20%" }}>
       <Table>
@@ -27,7 +28,7 @@ const ShowPurchase = ({
               Create date
             </TableCell>
             <TableCell align="left" className="th">
-              Product name
+              Product id
             </TableCell>
             <TableCell align="left" className="th">
               Category
@@ -52,7 +53,7 @@ const ShowPurchase = ({
               {createDate}
             </TableCell>
             <TableCell align="left" className="cell">
-              {product}
+              {showId}
             </TableCell>
             <TableCell align="left" className="cell">
               {category}

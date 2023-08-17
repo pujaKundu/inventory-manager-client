@@ -1,5 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Sidebar from "../../Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useAddClientMutation } from "../../../features/client/clientApi";
@@ -42,6 +42,7 @@ const AddClient = () => {
       email,
       phone,
       address,
+      id: Math.random(),
     };
     addClient(formData);
     setClientName("");

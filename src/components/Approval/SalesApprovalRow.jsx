@@ -12,7 +12,7 @@ import {
 
 const SalesApprovalRow = ({ sale }) => {
   const {
-    id,
+    _id,
     productId,
     quantity,
     sellingPrice,
@@ -38,11 +38,11 @@ const SalesApprovalRow = ({ sale }) => {
       // Check if the product has enough stock
       if (productData && productData.stock >= qty) {
         // If yes, update the sale status to "Approved"
-        await editSaleStatus({ saleId: id, isApproved: "Approved" });
+        await editSaleStatus({ saleId: _id, isApproved: "Approved" });
 
         // Update the product's stock
         await editProductStock({
-          productId: productData.id,
+          productId: productData._id,
           stock: productData.stock - qty,
           totalSales: updatedSales,
         });
@@ -58,17 +58,17 @@ const SalesApprovalRow = ({ sale }) => {
       // Check if the sale is already approved before canceling
       if (isApproved === "Approved") {
         // Update the sale status to "Canceled"
-        await editSaleStatus({ saleId: id, isApproved: "Canceled" });
+        await editSaleStatus({ saleId: _id, isApproved: "Canceled" });
 
         // Update the product's stock and totalSales back to original values
         await editProductStock({
-          productId: productData.id,
+          productId: productData._id,
           stock: productData.stock + qty,
           totalSales: productData.totalSales - totalPrice,
         });
       } else {
         // If the sale is not approved, simply update the sale status to "Canceled"
-        await editSaleStatus({ saleId: id, isApproved: "Canceled" });
+        await editSaleStatus({ saleId: _id, isApproved: "Canceled" });
       }
     } catch (error) {
       console.error("Error updating sale status or product stock:", error);

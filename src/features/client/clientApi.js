@@ -28,7 +28,7 @@ export const clientApi = apiSlice.injectEndpoints({
     editClient: builder.mutation({
       query: ({ clientId, data }) => ({
         url: `/customers/${clientId}`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -36,7 +36,7 @@ export const clientApi = apiSlice.injectEndpoints({
           const client = await queryFulfilled;
           dispatch(
             apiSlice.util.updateQueryData("getClients", undefined, (draft) => {
-              const index = draft.findIndex((t) => t.id === client?.data?.id);
+              const index = draft.findIndex((t) => t._id === client?.data?._id);
               if (index != -1) {
                 draft[index] = client?.data;
               }
@@ -46,8 +46,8 @@ export const clientApi = apiSlice.injectEndpoints({
       },
     }),
     deleteClient: builder.mutation({
-      query: (id) => ({
-        url: `/customers/${id}`,
+      query: (_id) => ({
+        url: `/customers/${_id}`,
         method: "DELETE",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -55,7 +55,7 @@ export const clientApi = apiSlice.injectEndpoints({
         try {
           dispatch(
             apiSlice.util.updateQueryData("getClients", undefined, (draft) => {
-              const index = draft.findIndex((t) => t?.id === clientId);
+              const index = draft.findIndex((t) => t?._id === clientId);
               if (index !== -1) {
                 draft.splice(index, 1);
               }
@@ -69,7 +69,7 @@ export const clientApi = apiSlice.injectEndpoints({
         const clientId = arg;
         dispatch(
           apiSlice.util.updateQueryData("getClients", undefined, (draft) => {
-            const client = { id: clientId };
+            const client = { _id: clientId };
             draft.push(client);
           })
         );

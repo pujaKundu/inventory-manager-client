@@ -3,7 +3,6 @@ import { useRegisterMutation } from "../features/auth/authApi";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -37,12 +36,6 @@ const Register = () => {
 
   return (
     <form method="POST" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="enter username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
       <input
         type="email"
         placeholder="enter email"

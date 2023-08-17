@@ -9,6 +9,7 @@ import { useGetProductsQuery } from "../../features/products/productsApi";
 import ShowConfirmedData from "../Shared/ShowConfirmedData";
 import { calculateTotalPrice } from "../../../utils/calculateVat";
 import Loader from "../Shared/Loader";
+import { v4 as uuidv4 } from "uuid";
 
 const offices = [
   { id: 1, name: "Dhaka" },
@@ -17,6 +18,7 @@ const offices = [
 
 const CreatePurchase = () => {
   const navigate = useNavigate();
+
   //get today date
   const currDate = new Date();
   const formattedDate = currDate.toISOString().split("T")[0];
@@ -39,19 +41,23 @@ const CreatePurchase = () => {
   const [vat, setVat] = useState(0);
   const [message, setMessage] = useState("");
 
-  const isApproved = false;
+  const isApproved = "Pending";
 
   const totalPrice = calculateTotalPrice(quantity, sellingPrice, vat);
 
-  if (sellingPrice < 0 || quantity < 0) {
+  if (sellingPrice < 0 || quantity < 0 || vat < 0) {
     alert("Please enter non-negative value");
   }
+  
 
   if (!categories || !suppliers || !products) {
     return <Loader />;
   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const id = uuidv4();
+
     const formData = {
       createDate: formattedDate,
       office,
@@ -59,13 +65,16 @@ const CreatePurchase = () => {
       shippingAddress,
       category,
       productId,
-      quantity,
+      quantity: parseInt(quantity),
       supplier,
-      sellingPrice,
-      vat,
+      sellingPrice: parseFloat(sellingPrice),
+      vat: parseInt(vat),
       isApproved,
-      totalPrice,
+      totalPrice: parseFloat(totalPrice),
+      id,
     };
+    console.log(formData);
+    console.log(id);
     addPurchase(formData);
     setCreateDate("");
     setOffice("");
@@ -75,7 +84,6 @@ const CreatePurchase = () => {
     setSupplier("");
     setProductId("");
     setQuantity(0);
-    setPrice(0);
     setSellingPrice(0);
     setVat(0);
 
@@ -128,7 +136,7 @@ const CreatePurchase = () => {
             onChange={(e) => setProductId(e.target.value)}
           >
             {products.map((option) => (
-              <MenuItem key={option.id} value={option.id}>
+              <MenuItem key={option._idid} value={option._id}>
                 {option.name}
               </MenuItem>
             ))}
@@ -143,7 +151,7 @@ const CreatePurchase = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             {categories.map((option) => (
-              <MenuItem key={option.id} value={option.name}>
+              <MenuItem key={option._id} value={option.name}>
                 {option.name}
               </MenuItem>
             ))}
@@ -217,7 +225,7 @@ const CreatePurchase = () => {
             onChange={(e) => setSupplier(e.target.value)}
           >
             {suppliers.map((option) => (
-              <MenuItem key={option.id} value={option.supplierName}>
+              <MenuItem key={option._id} value={option.supplierName}>
                 {option.supplierName}
               </MenuItem>
             ))}

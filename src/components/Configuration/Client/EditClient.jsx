@@ -33,7 +33,7 @@ const EditClient = () => {
       phone,
       address,
     };
-    editClient({ clientId: client?.id, data: formData });
+    editClient({ clientId: client?._id, data: formData });
     setClientName("");
     setContactName("");
     setEmail("");

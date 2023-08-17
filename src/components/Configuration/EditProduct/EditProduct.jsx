@@ -28,17 +28,23 @@ const EditProduct = () => {
   const [totalSales, setTotalSales] = useState(0);
   const [category, setCategory] = useState("");
 
+  // Convert the input values to numbers
+  const parsedPrice = parseInt(price);
+  const parsedTotalOrder = parseInt(totalOrder);
+  const parsedStock = parseInt(stock);
+  const parsedTotalSales = parseInt(totalSales);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
       name,
-      price,
-      totalOrder,
-      stock,
-      totalSales,
+      price: parsedPrice,
+      totalOrder: parsedTotalOrder,
+      stock: parsedStock,
+      totalSales: parsedTotalSales,
       category,
     };
-    editProduct({ productId: product?.id, data: formData });
+    editProduct({ productId: product?._id, data: formData });
     setName("");
     setPrice(0);
     setTotalOrder(0);
@@ -51,7 +57,7 @@ const EditProduct = () => {
   };
 
   if (loading) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   return (
@@ -121,7 +127,7 @@ const EditProduct = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             {categories.map((option) => (
-              <MenuItem key={option.id} value={option.name}>
+              <MenuItem key={option._id} value={option.name}>
                 {option.name}
               </MenuItem>
             ))}

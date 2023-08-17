@@ -11,6 +11,13 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const AddProduct = () => {
   const navigate = useNavigate();
+  //states for input values
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [totalOrder, setTotalOrder] = useState(0);
+  const [stock, setStock] = useState(0);
+  const [totalSales, setTotalSales] = useState(0);
+  const [category, setCategory] = useState("");
 
   const { data: categories, isLoading, isError } = useGetCategoriesQuery();
 
@@ -22,24 +29,29 @@ const AddProduct = () => {
   if (!categories) {
     return <Loader />;
   }
-  //states for input values
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [totalOrder, setTotalOrder] = useState(0);
-  const [stock, setStock] = useState(0);
-  const [totalSales, setTotalSales] = useState(0);
-  const [category, setCategory] = useState("");
+  // Convert the input values to numbers
+  const parsedPrice = parseInt(price);
+  const parsedTotalOrder = parseInt(totalOrder);
+  const parsedStock = parseInt(stock);
+  const parsedTotalSales = parseInt(totalSales);
+  const id = Math.random();
+
+  if (stock < 0 || totalOrder < 0 || totalSales < 0) {
+    alert("Please enter a non-negative value");
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
       name,
-      price,
-      totalOrder,
-      stock,
-      totalSales,
+      price: parsedPrice,
+      totalOrder: parsedTotalOrder,
+      stock: parsedStock,
+      totalSales: parsedTotalSales,
       category,
+      id,
     };
+    
     addProduct(formData);
     setName("");
     setPrice(0);
@@ -48,19 +60,11 @@ const AddProduct = () => {
     setTotalSales(0);
     setCategory("");
 
-    alert("Product added successfully");
-
-    navigate("/products");
+    if (!addProductLoading || !addProductError) {
+      // alert("Product added successfully");
+      navigate("/products");
+    }
   };
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (isError) {
-    // Handle error case
-    return <div>Error loading categories</div>;
-  }
 
   return (
     <div style={{ marginLeft: "15%" }}>
@@ -131,7 +135,7 @@ const AddProduct = () => {
             onChange={(e) => setCategory(e.target.value)}
           >
             {categories.map((option) => (
-              <MenuItem key={option.id} value={option.name}>
+              <MenuItem key={option._id} value={option.name}>
                 {option.name}
               </MenuItem>
             ))}

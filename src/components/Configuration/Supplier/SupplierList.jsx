@@ -69,7 +69,7 @@ const SupplierList = () => {
             </TableHead>
             <TableBody>
               {suppliers.map((supplier) => (
-                <SupplierRow key={supplier.id} supplier={supplier} />
+                <SupplierRow key={supplier._id} supplier={supplier} />
               ))}
             </TableBody>
           </Table>
