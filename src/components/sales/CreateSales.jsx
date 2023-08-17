@@ -10,6 +10,7 @@ import { calculateTotalPrice } from "../../../utils/calculateVat";
 import ShowConfirmedData from "../Shared/ShowConfirmedData";
 import Loader from "../Shared/Loader";
 import { v4 as uuidv4 } from "uuid";
+import Swal from "sweetalert2";
 
 const offices = [
   { id: 1, name: "Dhaka" },
@@ -88,7 +89,7 @@ const CreateSales = () => {
     setVat(0);
 
     //notification
-    alert("Sales order created");
+    Swal.fire("Sales order created successfully!", "success");
     navigate("/sales");
   };
 

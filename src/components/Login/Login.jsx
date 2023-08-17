@@ -13,19 +13,15 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  console.log(data);
-
   useEffect(() => {
-   
     if (responseError?.data) {
       setError(responseError.data);
     }
-    if ( data) {
+    if (data) {
       // Data is available after successful login
-     
+
       navigate("/homepage");
     }
-    
   }, [data, responseError, navigate]);
 
   const handleSubmit = (e) => {

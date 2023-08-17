@@ -8,6 +8,7 @@ import {
   useGetClientQuery,
 } from "../../../features/client/clientApi";
 import Loader from "../../Shared/Loader";
+import Swal from "sweetalert2";
 
 const EditClient = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const EditClient = () => {
     setPhone("");
     setAddress("");
 
-    alert("Client edited successfully");
+    Swal.fire("Client edited!", "success");
     navigate("/clients");
   };
 

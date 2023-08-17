@@ -6,8 +6,7 @@ import { useAddProductMutation } from "../../../features/products/productsApi";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/styles.scss";
 import Loader from "../../Shared/Loader";
-import Alert from "@mui/material/Alert";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import Swal from "sweetalert2";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -61,7 +60,7 @@ const AddProduct = () => {
     setCategory("");
 
     if (!addProductLoading || !addProductError) {
-      // alert("Product added successfully");
+      Swal.fire("Product added!", "success");
       navigate("/products");
     }
   };

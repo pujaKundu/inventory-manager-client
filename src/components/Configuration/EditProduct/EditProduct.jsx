@@ -9,6 +9,7 @@ import {
   useGetProductQuery,
 } from "../../../features/products/productsApi";
 import Loader from "../../Shared/Loader";
+import Swal from "sweetalert2";
 
 const EditProduct = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const EditProduct = () => {
     setTotalSales(0);
     setCategory("");
 
-    alert("Product edited successfully");
+    Swal.fire("Product edited!", "success");
     navigate("/products");
   };
 

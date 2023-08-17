@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Sidebar from "../../Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useAddClientMutation } from "../../../features/client/clientApi";
+import Swal from "sweetalert2";
 
 const AddClient = () => {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ const AddClient = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [error, setError] = useState("");
 
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -24,7 +24,6 @@ const AddClient = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsFormSubmitted(true); // Set the form submission flag to true
 
     // Validate email
     if (!emailPattern.test(email)) {
@@ -51,7 +50,7 @@ const AddClient = () => {
     setPhone("");
     setAddress("");
 
-    alert("Client added successfully");
+    Swal.fire("Client added!", "success");
     navigate("/clients");
   };
   return (

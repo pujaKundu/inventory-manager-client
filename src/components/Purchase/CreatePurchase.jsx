@@ -10,6 +10,7 @@ import ShowConfirmedData from "../Shared/ShowConfirmedData";
 import { calculateTotalPrice } from "../../../utils/calculateVat";
 import Loader from "../Shared/Loader";
 import { v4 as uuidv4 } from "uuid";
+import Swal from "sweetalert2";
 
 const offices = [
   { id: 1, name: "Dhaka" },
@@ -48,7 +49,6 @@ const CreatePurchase = () => {
   if (sellingPrice < 0 || quantity < 0 || vat < 0) {
     alert("Please enter non-negative value");
   }
-  
 
   if (!categories || !suppliers || !products) {
     return <Loader />;
@@ -73,8 +73,7 @@ const CreatePurchase = () => {
       totalPrice: parseFloat(totalPrice),
       id,
     };
-    console.log(formData);
-    console.log(id);
+
     addPurchase(formData);
     setCreateDate("");
     setOffice("");
@@ -88,7 +87,7 @@ const CreatePurchase = () => {
     setVat(0);
 
     //notification
-    alert("Purchase order created");
+    Swal.fire("Purchase order created successfully!", "success");
     navigate("/purchase");
   };
   return (

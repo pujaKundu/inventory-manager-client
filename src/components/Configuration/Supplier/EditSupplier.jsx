@@ -7,6 +7,7 @@ import {
 import Sidebar from "../../Sidebar/Sidebar";
 import { Button, TextField } from "@mui/material";
 import Loader from "../../Shared/Loader";
+import Swal from "sweetalert2";
 
 const EditSupplier = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const EditSupplier = () => {
     setPhone("");
     setAddress("");
 
-    // alert("Supplier edited successfully");
+    Swal.fire("Supplier edited!", "success");
     navigate("/suppliers");
   };
 

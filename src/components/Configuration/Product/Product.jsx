@@ -18,7 +18,6 @@ const Product = ({ product }) => {
   return (
     <>
       <TableRow>
-        
         <TableCell align="left" className="cell">
           {name}
         </TableCell>
@@ -37,13 +36,15 @@ const Product = ({ product }) => {
         <TableCell align="left" className="cell">
           {totalOrder}
         </TableCell>
-        <Link to={`/editProduct/${_id}`}>
-          <TableCell align="left" className="cell">
-            <EditIcon className="icon" />
-          </TableCell>
-        </Link>
+
         <TableCell align="left" className="cell">
-          <DeleteIcon className="icon"  onClick={handleDelete} />
+          <Link to={`/editProduct/${_id}`}>
+            <EditIcon className="icon" />
+          </Link>
+        </TableCell>
+
+        <TableCell align="left" className="cell">
+          <DeleteIcon className="icon" onClick={handleDelete} />
         </TableCell>
       </TableRow>
     </>

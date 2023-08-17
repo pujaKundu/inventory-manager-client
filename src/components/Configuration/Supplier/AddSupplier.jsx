@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Sidebar from "../../Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useAddSupplierMutation } from "../../../features/suppliers/suppliersApi";
+import Swal from "sweetalert2";
 
 const AddSupplier = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const AddSupplier = () => {
       email,
       phone,
       address,
-      id
+      id,
     };
     addSupplier(formData);
     setSupplierName("");
@@ -44,7 +45,7 @@ const AddSupplier = () => {
     setPhone("");
     setAddress("");
 
-    alert("Supplier added successfully");
+    Swal.fire("Supplier added!", "success");
     navigate("/suppliers");
   };
   return (

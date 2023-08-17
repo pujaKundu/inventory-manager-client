@@ -42,7 +42,8 @@ const DonutChart = () => {
     ],
   };
   return (
-    <div style={{ width: "380px", marginLeft: "30%" }}>
+    <div style={{ width: "380px", marginLeft: "25%", marginTop: "10%" }}>
+      <h5 style={{ color: "gray" }}>Top selling products</h5>
       <Doughnut data={data} />;
     </div>
   );

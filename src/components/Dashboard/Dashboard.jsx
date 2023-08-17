@@ -66,6 +66,7 @@ const Dashboard = () => {
       <div style={{ width: "800px", height: "600px", marginLeft: "30%" }}>
         <Data />
         <Bar data={data} options={options} />
+        <DonutChart />
       </div>
     </>
   );
